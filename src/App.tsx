@@ -1,7 +1,13 @@
-import { memo } from "react";
+import Router from "@/routers/index";
+import { BrowserRouter } from "react-router-dom";
 import "@/App.css";
-const App = memo(function App() {
-	return <div className="app-container">app-container</div>;
-});
+
+const App = () => {
+	return (
+		<BrowserRouter>
+			<Router />
+		</BrowserRouter>
+	);
+};
 
 export default App;

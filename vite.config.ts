@@ -22,6 +22,7 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 		css: {
 			preprocessorOptions: {
 				scss: {
+					// 引入css全局变量的文件
 					additionalData: `@import "@/styles/var.scss";`,
 				},
 			},
