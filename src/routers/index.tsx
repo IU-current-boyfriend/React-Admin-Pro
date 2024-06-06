@@ -1,14 +1,30 @@
+import Home from "@/views/Home";
 import Login from "@/views/login/index";
-import { useRoutes, Navigate, type RouteObject } from "react-router-dom";
+import NotFound from "@/components/ErrorMessage/404";
+import LayoutIndex from "@/layouts/index";
+import { useRoutes, type RouteObject } from "react-router-dom";
 
 const rootRouter: RouteObject[] = [
 	{
 		path: "/",
-		element: <Login />,
+		element: <Home />,
 	},
 	{
 		path: "/login",
-		element: <Navigate to="/login" />,
+		element: <Login />,
+	},
+	{
+		element: <LayoutIndex name="我是参数" />,
+		children: [
+			{
+				path: "/home",
+				element: <Home />,
+			},
+		],
+	},
+	{
+		path: "*",
+		element: <NotFound />,
 	},
 ];
 
