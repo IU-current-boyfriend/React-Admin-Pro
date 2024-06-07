@@ -3,7 +3,8 @@
 	align-items: center;
 	justify-content: space-between;
 	background-color: #fff;
-	height: 60px;
+	// height: 60px;
+	height: 55px;
 	padding: 0 40px 0 20px;
 	border-bottom: 1px solid #f6f6f6;
 	.header-lf {
@@ -15,6 +16,15 @@
 			cursor: pointer;
 			// 这个过渡效果展示没见到
 			transition: color 0.3s;
+		}
+	}
+	.header-ri {
+		display: flex;
+		align-items: center;
+		.username {
+			margin: 0 20px 0 0;
+			font-size: 15px;
+			color: #000000bf;
 		}
 	}
 }
