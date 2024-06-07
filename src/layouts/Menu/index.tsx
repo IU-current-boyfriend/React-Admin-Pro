@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-// import { HomeOutlined, AreaChartOutlined, TableOutlined } from "@ant-design/icons";
-// import { Link, useLocation } from "react-router-dom";
+import { type MenuProps } from "antd";
 import {
 	HomeOutlined,
 	TableOutlined,
@@ -11,15 +10,15 @@ import {
 	ShoppingOutlined,
 	AppstoreOutlined,
 } from "@ant-design/icons";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Menu } from "antd";
 import Logo from "./components/Logo";
-
 import "./index.scss";
+
 const LayoutMenu = () => {
 	const { pathname } = useLocation();
 	const [menuActive, setMenuActive] = useState(pathname);
-	const [menuList] = useState([
+	const menuList = [
 		{
 			label: "首页",
 			key: "/home",
@@ -37,12 +36,12 @@ const LayoutMenu = () => {
 			children: [
 				{
 					label: "使用Hooks",
-					key: "/table/useHooks",
+					key: "/proTable/useHooks",
 					icon: <AppstoreOutlined />,
 				},
 				{
 					label: "使用Component",
-					key: "/table/useComponent",
+					key: "/proTable/useComponent",
 					icon: <AppstoreOutlined />,
 				},
 			],
@@ -135,14 +134,58 @@ const LayoutMenu = () => {
 				},
 			],
 		},
-	]);
+	];
+
+	/**
+	 * 通过pathname设置subMenu菜单栏选中项
+	 */
+	const getSubMenuActive = () => {
+		menuList.forEach((item) => {
+			if (item.children) {
+				item.children.forEach((child) => {
+					if (child.key === pathname) {
+						setSubMenuActive(item.key);
+					}
+				});
+			}
+		});
+	};
+
 	useEffect(() => {
+		getSubMenuActive();
 		setMenuActive(pathname);
 	}, [pathname]);
+
+	const navigate = useNavigate();
+	/**
+	 * 点击MenuItem的事件处理函数
+	 * @param e
+	 */
+	const clickMenu: MenuProps["onClick"] = (e) => {
+		navigate(e.key);
+	};
+
+	const [subMenuActive, setSubMenuActive] = useState("");
+
+	const openSubMenu = (openKeys: any) => {
+		if (openKeys.length === 0) return setSubMenuActive("");
+		console.log("openKeys: =>", openKeys);
+		setSubMenuActive(openKeys[1]);
+	};
+
 	return (
 		<div className="menu">
 			<Logo></Logo>
-			<Menu theme="dark" mode="inline" triggerSubMenuAction="click" selectedKeys={[menuActive]} items={menuList}></Menu>
+			<Menu
+				theme="dark"
+				mode="inline"
+				triggerSubMenuAction="click"
+				selectedKeys={[menuActive]}
+				items={menuList}
+				openKeys={[subMenuActive]}
+				onClick={clickMenu}
+				onOpenChange={openSubMenu}
+			></Menu>
 		</div>
 	);
 };
