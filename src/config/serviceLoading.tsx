@@ -1,4 +1,4 @@
-import { createPortal } from "react-dom";
+import { createRoot } from "react-dom/client";
 import Loading from "@/components/Loading";
 
 let needLoadingRequestCount = 0;
@@ -29,7 +29,8 @@ export const showFullScreenLoading = () => {
 		let dom = document.createElement("div");
 		dom.setAttribute("id", "loading");
 		document.body.appendChild(dom);
-		createPortal(<Loading />, dom);
+		// createPortal(<Loading />, dom);
+		createRoot(dom).render(<Loading />);
 	}
 	needLoadingRequestCount++;
 };

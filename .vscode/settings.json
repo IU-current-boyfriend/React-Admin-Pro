@@ -4,6 +4,18 @@
 		"source.fixAll.stylelint": true
 	},
 	"stylelint.validate": ["css", "less", "postcss", "scss", "sass"],
-	"cSpell.words": ["antd", "anticon", "Appstore", "breakline", "browserslist", "cnpm", "Sider", "styl", "stylelint"],
+	"cSpell.words": [
+		"antd",
+		"anticon",
+		"Appstore",
+		"breakline",
+		"browserslist",
+		"cnpm",
+		"Sider",
+		"styl",
+		"stylelint",
+		"easymock",
+		"fastmock"
+	],
 	"files.eol": "\n"
 }

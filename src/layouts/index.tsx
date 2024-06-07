@@ -15,7 +15,8 @@ const LayoutIndex = (props: { name: string }) => {
 	const { pathname } = useLocation();
 
 	return (
-		<Layout>
+		// <Layout>
+		<section className="container">
 			<Sider trigger={null} collapsible collapsed={false}>
 				<LayoutMenu></LayoutMenu>
 			</Sider>
@@ -24,7 +25,7 @@ const LayoutIndex = (props: { name: string }) => {
 				<LayoutTabs></LayoutTabs>
 				<Content>
 					{/* 这里样式暂时并未设置fade滑动效果，类名虽然设置了，但还未实现 */}
-					<TransitionGroup className="container">
+					<TransitionGroup className="content">
 						{/* exit: 表示退出当前页面的时候是否有动画 */}
 						<CSSTransition timeout={200} classNames="fade" exit={false} key={pathname}>
 							<Outlet></Outlet>
@@ -33,7 +34,8 @@ const LayoutIndex = (props: { name: string }) => {
 				</Content>
 				<LayoutFooter></LayoutFooter>
 			</Layout>
-		</Layout>
+		</section>
+		// </Layout>
 	);
 };
 export default LayoutIndex;
