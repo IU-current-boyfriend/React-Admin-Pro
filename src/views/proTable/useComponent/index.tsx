@@ -1,5 +1,5 @@
 const useComponent = () => {
-	return <h1>use Component</h1>;
+	return <span>UseComponent</span>;
 };
 
 export default useComponent;

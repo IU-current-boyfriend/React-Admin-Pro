@@ -24,6 +24,7 @@ const AvatarIcon = () => {
 			cancelText: "取消",
 			onOk: () => {
 				message.success("退出登录成功!");
+				navigate("/login");
 			},
 		});
 	};
@@ -31,15 +32,27 @@ const AvatarIcon = () => {
 		<Menu
 			items={[
 				{
-					label: <span onClick={getHome}>首页</span>,
+					label: (
+						<span className="dropdown-item" onClick={getHome}>
+							首页
+						</span>
+					),
 					key: "0",
 				},
 				{
-					label: <span onClick={() => infoRef.current.showModal({ name: 111 })}>个人信息</span>,
+					label: (
+						<span className="dropdown-item" onClick={() => infoRef.current.showModal({ name: 111 })}>
+							个人信息
+						</span>
+					),
 					key: "1",
 				},
 				{
-					label: <span onClick={() => passRef.current.showModal({ name: 222 })}>修改密码</span>,
+					label: (
+						<span className="dropdown-item" onClick={() => passRef.current.showModal({ name: 222 })}>
+							修改密码
+						</span>
+					),
 					key: "2",
 				},
 				// { 这种写法，导致onClick属性接受的类型不匹配,需要通过绑定函数来处理，不能够直接调用showModal方法
@@ -50,7 +63,11 @@ const AvatarIcon = () => {
 					type: "divider",
 				},
 				{
-					label: <span onClick={logout}>退出登录</span>,
+					label: (
+						<span className="dropdown-item" onClick={logout}>
+							退出登录
+						</span>
+					),
 					key: "4",
 				},
 			]}
