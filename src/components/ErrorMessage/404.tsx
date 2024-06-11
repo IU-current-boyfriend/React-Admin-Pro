@@ -1,11 +1,12 @@
 import { Button, Result } from "antd";
 import { useNavigate } from "react-router-dom";
+import { HOME_URL } from "@/config";
 import "./index.scss";
 
 // React.FC react中的组件类型
 const NotFound = () => {
 	const navigate = useNavigate();
-	const goHome = () => navigate("/home");
+	const goHome = () => navigate(HOME_URL);
 	return (
 		<Result
 			status="404"

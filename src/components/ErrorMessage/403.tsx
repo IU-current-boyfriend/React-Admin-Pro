@@ -1,10 +1,11 @@
 import { Button, Result } from "antd";
 import { useNavigate } from "react-router-dom";
+import { HOME_URL } from "@/config";
 import "./index.scss";
 
 const NotAuth = () => {
 	const navigate = useNavigate();
-	const goHome = () => navigate("/home");
+	const goHome = () => navigate(HOME_URL);
 	return (
 		<Result
 			status="403"

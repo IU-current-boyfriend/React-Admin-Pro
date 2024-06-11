@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Tabs } from "antd";
 import { HomeFilled } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
+import { HOME_URL } from "@/config";
 import "./index.scss";
 
 const LayoutTabs = () => {
@@ -11,7 +12,7 @@ const LayoutTabs = () => {
 	const [tabList] = useState([
 		{
 			title: "首页",
-			path: "/home",
+			path: "/home/index",
 		},
 		{
 			title: "数据大屏",
@@ -62,11 +63,11 @@ const LayoutTabs = () => {
 						key={item.path}
 						tab={
 							<span>
-								{item.path === "/home" ? <HomeFilled /> : ""}
+								{item.path === HOME_URL ? <HomeFilled /> : ""}
 								{item.title}
 							</span>
 						}
-						closable={item.path !== "/home"}
+						closable={item.path !== HOME_URL}
 					></TabPane>
 				);
 			})}

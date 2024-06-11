@@ -1,7 +1,7 @@
 import { Avatar, Modal, Menu, Dropdown, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { useRef } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import avatar from "@/assets/images/avatar.png";
 import InfoModal from "./InfoModal";
 import PasswordModal from "./PasswordModal";

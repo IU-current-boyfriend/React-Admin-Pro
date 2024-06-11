@@ -1,141 +1,63 @@
-import { useEffect, useState } from "react";
-import { type MenuProps } from "antd";
-import {
-	HomeOutlined,
-	TableOutlined,
-	PieChartOutlined,
-	FileTextOutlined,
-	AreaChartOutlined,
-	FundOutlined,
-	ShoppingOutlined,
-	AppstoreOutlined,
-} from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
+import { Spin, Menu, type MenuProps } from "antd";
+import * as Icons from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Menu } from "antd";
 import Logo from "./components/Logo";
 import { getOpenKeys } from "@/utils/utils";
+import { getMenuList } from "@/api/modules/login";
 import "./index.scss";
+
+type MenuItem = Required<MenuProps>["items"][number];
 
 const LayoutMenu = () => {
 	const { pathname } = useLocation();
+	const [loading, setLoading] = useState<boolean>(false);
+	const [menuList, setMenuList] = useState<MenuItem[]>([]);
 
-	const menuList = [
-		{
-			label: "首页",
-			key: "/home",
-			icon: <HomeOutlined />,
-		},
-		{
-			label: "数据大屏",
-			key: "/dataScreen",
-			icon: <AreaChartOutlined />,
-		},
-		{
-			label: "超级表格",
-			key: "/proTable",
-			icon: <TableOutlined />,
-			children: [
-				{
-					label: "使用Hooks",
-					key: "/proTable/useHooks",
-					icon: <AppstoreOutlined />,
-				},
-				{
-					label: "使用Component",
-					key: "/proTable/useComponent",
-					icon: <AppstoreOutlined />,
-				},
-			],
-		},
-		{
-			label: "Dashboard",
-			key: "/dashboard",
-			icon: <FundOutlined />,
-			children: [
-				{
-					key: "/dashboard/dataVisualize",
-					label: "数据可视化",
-					icon: <AppstoreOutlined />,
-				},
-				{
-					key: "/dashboard/embedded",
-					label: "内嵌页面",
-					icon: <AppstoreOutlined />,
-				},
-			],
-		},
-		{
-			label: "表单Form",
-			key: "/form",
-			icon: <FileTextOutlined />,
-			children: [
-				{
-					key: "/form/basicForm",
-					label: "基础Form",
-					icon: <AppstoreOutlined />,
-				},
-				{
-					key: "/form/validateForm",
-					label: "校验Form",
-					icon: <AppstoreOutlined />,
-				},
-				{
-					key: "/form/dynamicForm",
-					label: "动态Form",
-					icon: <AppstoreOutlined />,
-				},
-			],
-		},
-		{
-			label: "Echarts",
-			key: "/echarts",
-			icon: <PieChartOutlined />,
-			children: [
-				{
-					key: "/echarts/waterChart",
-					label: "水型图",
-					icon: <AppstoreOutlined />,
-				},
-				{
-					key: "/echarts/lineChart",
-					label: "折线图",
-					icon: <AppstoreOutlined />,
-				},
-				{
-					key: "/echarts/pieChart",
-					label: "饼图",
-					icon: <AppstoreOutlined />,
-				},
-				{
-					key: "/echarts/radarChart",
-					label: "雷达图",
-					icon: <AppstoreOutlined />,
-				},
-				{
-					key: "/echarts/nestedChart",
-					label: "嵌套环形图",
-					icon: <AppstoreOutlined />,
-				},
-			],
-		},
-		{
-			label: "常用组件",
-			key: "/assembly",
-			icon: <ShoppingOutlined />,
-			children: [
-				{
-					key: "/assembly/selectIcon",
-					label: "Icon 选择",
-					icon: <AppstoreOutlined />,
-				},
-				{
-					key: "/assembly/batchImport",
-					label: "批量导入数据",
-					icon: <AppstoreOutlined />,
-				},
-			],
-		},
-	];
+	const getItem = (
+		label: React.ReactNode,
+		key?: React.Key | null,
+		icon?: React.ReactNode,
+		children?: MenuItem[],
+		type?: "group"
+	): MenuItem => {
+		return {
+			label,
+			key,
+			icon,
+			children,
+			type,
+		} as MenuItem;
+	};
+
+	// 动态渲染图标
+	const customIcons: { [key: string]: any } = Icons;
+
+	const addIcon = (name: string) => {
+		return React.createElement(customIcons[name]);
+	};
+
+	// 递归组装Menu菜单数据
+	const deepLoopFloat = (menuList: Menu.MenuOptions[], newArr: MenuItem[] = []) => {
+		menuList.forEach((item: Menu.MenuOptions) => {
+			if (!item?.children?.length) return newArr.push(getItem(item.title, item.path, addIcon(item.icon!)));
+			newArr.push(getItem(item.title, item.path, addIcon(item.icon!), deepLoopFloat(item.children)));
+		});
+		return newArr;
+	};
+
+	/**
+	 * getMenuData请求菜单栏数据
+	 */
+	const getMenuData = async () => {
+		setLoading(true);
+		try {
+			const res = await getMenuList();
+			res.data && setMenuList(deepLoopFloat(res.data));
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	/**
 	 * 通过pathname设置subMenu菜单栏选中项
@@ -149,6 +71,10 @@ const LayoutMenu = () => {
 		setOpenKeys(getOpenKeys(pathname));
 	}, [pathname]);
 
+	useEffect(() => {
+		getMenuData();
+	}, []);
+
 	const navigate = useNavigate();
 	/**
 	 * 点击MenuItem的事件处理函数
@@ -159,7 +85,6 @@ const LayoutMenu = () => {
 	};
 
 	const onOpenChange = (openKeys: string[]) => {
-		console.log("openKeys: =>", openKeys);
 		if (openKeys.length === 0 || openKeys.length === 1) return setOpenKeys(openKeys);
 		const latestOpenKey = openKeys[openKeys.length - 1];
 		// 最新展开的SubMenu,说明当前展开的subMenu是同一个
@@ -170,16 +95,18 @@ const LayoutMenu = () => {
 	return (
 		<div className="menu">
 			<Logo></Logo>
-			<Menu
-				theme="dark"
-				mode="inline"
-				triggerSubMenuAction="click"
-				selectedKeys={selectedKeys}
-				items={menuList}
-				openKeys={openKeys}
-				onClick={clickMenu}
-				onOpenChange={onOpenChange}
-			></Menu>
+			<Spin tip="loading..." spinning={loading}>
+				<Menu
+					theme="dark"
+					mode="inline"
+					triggerSubMenuAction="click"
+					selectedKeys={selectedKeys}
+					items={menuList}
+					openKeys={openKeys}
+					onClick={clickMenu}
+					onOpenChange={onOpenChange}
+				></Menu>
+			</Spin>
 		</div>
 	);
 };
