@@ -2,9 +2,9 @@ import { Navigate, useRoutes, type RouteObject } from "react-router-dom";
 import React from "react";
 import lazyLoad from "./lazyLoad";
 // import Home from "@/views/Home";
-// import Login from "@/views/login/index";
+import Login from "@/views/login/index";
 // import NotFound from "@/components/ErrorMessage/404";
-// import LayoutIndex from "@/layouts/index";
+import LayoutIndex from "@/layouts/index";
 // import DataScreen from "@/views/dataScreen";
 // import UseHooks from "@/views/proTable/useHooks";
 // import UseComponent from "@/views/proTable/useComponent";
@@ -17,10 +17,12 @@ const rootRouter: RouteObject[] = [
 	},
 	{
 		path: "/login",
-		element: lazyLoad(React.lazy(() => import("@/views/login/index"))),
+		// element: lazyLoad(React.lazy(() => import("@/views/login/index"))),
+		element: <Login />,
 	},
 	{
-		element: lazyLoad(React.lazy(() => import("@/layouts/index"))),
+		// element: lazyLoad(React.lazy(() => import("@/layouts/index"))),
+		element: <LayoutIndex />,
 		children: [
 			{
 				path: "/home",

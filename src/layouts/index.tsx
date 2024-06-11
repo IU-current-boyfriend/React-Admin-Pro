@@ -10,7 +10,7 @@ import "./index.scss";
 // 从antd中的Layout组件中解构出侧边栏、content组件
 const { Sider, Content } = Layout;
 
-const LayoutIndex = (props: { name: string }) => {
+const LayoutIndex = (props: { name?: string }) => {
 	console.log("props: =>", props);
 	const { pathname } = useLocation();
 
