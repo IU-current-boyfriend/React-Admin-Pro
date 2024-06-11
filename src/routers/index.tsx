@@ -13,7 +13,7 @@ import lazyLoad from "./lazyLoad";
 const rootRouter: RouteObject[] = [
 	{
 		path: "/",
-		element: <Navigate to="/home" />,
+		element: <Navigate to="/login" />,
 	},
 	{
 		path: "/login",
