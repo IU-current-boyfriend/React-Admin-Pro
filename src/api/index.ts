@@ -41,7 +41,8 @@ class RequestHttp {
 				*/
 				config.headers!.noLoading || showFullScreenLoading();
 				// const token: string = store.getState().global.token;
-				const token: string = "123456";
+				// const token: string = "123456";
+				const token: string = "bqddxxwqmfncffacvbpkuxvwvqrhln";
 				return { ...config, headers: { "x-access-token": token } };
 			},
 			(error: AxiosError) => {

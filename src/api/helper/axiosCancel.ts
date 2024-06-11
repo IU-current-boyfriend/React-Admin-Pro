@@ -1,5 +1,6 @@
 import axios, { type AxiosRequestConfig, type Canceler } from "axios";
 import { isFunction } from "@/utils/is";
+// qs依赖模块也可以安装@types/qs依赖定义类型
 import qs from "qs";
 
 // 声明一个Map用于储存每个请求的表示和取消函数
