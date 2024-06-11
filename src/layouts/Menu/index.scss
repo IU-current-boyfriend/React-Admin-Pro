@@ -22,13 +22,16 @@
 			white-space: nowrap;
 		}
 	}
-	.ant-menu {
+	.ant-menu-root {
 		// 计算容器高度 = 父元素高度 - 60px (动态)
 		// height: calc(100% - 60px);
 		flex: 1;
-		overflow: auto;
-		.ant-menu-sub {
-			overflow-y: hidden;
-		}
+
+		// overflow: auto;
+		// .ant-menu-sub {
+		// 	overflow-y: hidden;
+		// }
+		overflow-x: auto;
+		overflow-y: auto;
 	}
 }

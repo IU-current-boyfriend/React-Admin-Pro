@@ -17,7 +17,7 @@ const LayoutIndex = (props: { name: string }) => {
 	return (
 		// <Layout>
 		<section className="container">
-			<Sider trigger={null} collapsible collapsed={false}>
+			<Sider trigger={null} collapsed={false} width={200} theme="dark">
 				<LayoutMenu></LayoutMenu>
 			</Sider>
 			<Layout>
