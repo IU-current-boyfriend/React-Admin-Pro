@@ -50,7 +50,7 @@ export const searchRouteDetail = (path: string, routes: RouteObject[], result: s
 		if (route.path === path) result.push(route.meta!.title);
 		if (route.children && route.children.length > 0) {
 			// 添加当前成功匹配到的路由信息
-			includeRouteDetail(route.children) && result.push(route.meta!.title);
+			includeRouteDetail(route.children) && route.meta && result.push(route.meta.title);
 			// 递归只会添加匹配到的最后一个路由信息
 			searchRouteDetail(path, route.children, result);
 		}
