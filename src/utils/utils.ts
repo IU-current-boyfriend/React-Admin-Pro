@@ -16,24 +16,29 @@ export const getOpenKeys = (path: string) => {
 };
 
 /**
- * 递归查询对应的路由
  *
+ * @param path 当前路由路径
+ * @param routes 全部的路由配置信息
+ * @returns 路由title信息
  */
-export const searchRouteDetail = (path: string, routes: RouteObject[]): string[] => {
-	let result: string[] = [];
-	routes.forEach((item) => {
-		if (item.path === path) {
-			result.push(item.meta!.title);
-		} else {
-			if (item.children && item.children.length > 0) {
-				item.children.forEach((i) => {
-					if (i.path === path) {
-						result.push(item.meta!.title, i.meta!.title);
-					}
-				});
-			}
+export const searchRouteDetail = (path: string, routes: RouteObject[], result: string[] = []): string[] => {
+	const includeRouteDetail = (routeArr: RouteObject[]): RouteObject | undefined => {
+		return routeArr.find((item) => {
+			if (item.path === path) return true;
+			if (item.children && item.children.length > 0) return includeRouteDetail(item.children);
+		});
+	};
+
+	routes.forEach((route) => {
+		if (route.path === path) result.push(route.meta!.title);
+		if (route.children && route.children.length > 0) {
+			// 添加当前成功匹配到的路由信息
+			includeRouteDetail(route.children) && result.push(route.meta!.title);
+			// 递归只会添加匹配到的最后一个路由信息
+			searchRouteDetail(path, route.children, result);
 		}
 	});
+
 	return result;
 };
 
