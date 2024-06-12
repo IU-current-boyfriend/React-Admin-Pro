@@ -16,7 +16,7 @@ const LayoutTabs = () => {
 		},
 		{
 			title: "数据大屏",
-			path: "/dataScreen",
+			path: "/dataScreen/index",
 		},
 		{
 			title: "使用 Hooks",
@@ -29,6 +29,10 @@ const LayoutTabs = () => {
 		{
 			title: "数据可视化",
 			path: "/dashboard/dataVisualize",
+		},
+		{
+			title: "内嵌页面",
+			path: "/dashboard/embedded",
 		},
 	]);
 	const navigate = useNavigate();

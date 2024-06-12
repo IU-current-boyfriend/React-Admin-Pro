@@ -1,16 +1,22 @@
-import { Navigate, useRoutes, type RouteObject } from "react-router-dom";
-import React from "react";
-import lazyLoad from "./lazyLoad";
+import { Navigate, useRoutes } from "react-router-dom";
+import { RouteObject } from "@/routers/interface";
 
 // Login、LayoutIndex没有必要懒加载
 import Login from "@/views/login/index";
-import LayoutIndex from "@/layouts/index";
-// import Home from "@/views/Home";
-// import NotFound from "@/components/ErrorMessage/404";
-// import DataScreen from "@/views/dataScreen";
-// import UseHooks from "@/views/proTable/useHooks";
-// import UseComponent from "@/views/proTable/useComponent";
-// import DataVisualize from "@/views/dashboard/dataVisualize";
+
+// 通过vite获取到所有的路由
+const metaRoutes = import.meta.globEager("./modules/*.tsx");
+// console.log("meta: =>", metaRoutes);
+
+// 处理路由
+export const routerArray: RouteObject[] = [];
+
+Object.entries(metaRoutes).reduce((prev, [routeKey, route]) => {
+	routeKey && route.default && routerArray.push(...route.default);
+	return prev;
+}, routerArray);
+
+console.log("Array: =>", routerArray);
 
 const rootRouter: RouteObject[] = [
 	{
@@ -19,47 +25,16 @@ const rootRouter: RouteObject[] = [
 	},
 	{
 		path: "/login",
-		// element: lazyLoad(React.lazy(() => import("@/views/login/index"))),
 		element: <Login />,
+		// meta的作用，可以用做路由跳转携带的信息，比如说requiresAuth字段，如果存在的话
+		// 就可以当作用户已经登录，如果不存在则没有登录
+		meta: {
+			requiresAuth: true,
+			title: "登录页",
+			key: "login",
+		},
 	},
-	{
-		// element: lazyLoad(React.lazy(() => import("@/layouts/index"))),
-		element: <LayoutIndex />,
-		children: [
-			{
-				path: "/home/index",
-				element: lazyLoad(React.lazy(() => import("@/views/home/index"))),
-			},
-			{
-				path: "/dataScreen",
-				element: lazyLoad(React.lazy(() => import("@/views/dataScreen/index"))),
-			},
-			{
-				path: "/proTable/useHooks",
-				element: lazyLoad(React.lazy(() => import("@/views/proTable/useHooks"))),
-			},
-			{
-				path: "/proTable/useComponent",
-				element: lazyLoad(React.lazy(() => import("@/views/proTable/useComponent"))),
-			},
-			{
-				path: "/dashboard/dataVisualize",
-				element: lazyLoad(React.lazy(() => import("@/views/dashboard/dataVisualize"))),
-			},
-		],
-	},
-	{
-		path: "/403",
-		element: lazyLoad(React.lazy(() => import("@/components/ErrorMessage/403"))),
-	},
-	{
-		path: "/404",
-		element: lazyLoad(React.lazy(() => import("@/components/ErrorMessage/404"))),
-	},
-	{
-		path: "/500",
-		element: lazyLoad(React.lazy(() => import("@/components/ErrorMessage/500"))),
-	},
+	...routerArray,
 	{
 		path: "*",
 		element: <Navigate to="/404" />,
