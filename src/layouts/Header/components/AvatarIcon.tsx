@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import avatar from "@/assets/images/avatar.png";
 import InfoModal from "./InfoModal";
 import PasswordModal from "./PasswordModal";
+import { HOME_URL } from "@/config";
 
 interface ModalProps {
 	showModal: (params: { name: number }) => void;
@@ -12,7 +13,7 @@ interface ModalProps {
 
 const AvatarIcon = () => {
 	const navigate = useNavigate();
-	const getHome = () => navigate("/home");
+	const getHome = () => navigate(HOME_URL);
 	const infoRef = useRef<ModalProps>(null!);
 	const passRef = useRef<ModalProps>(null!);
 	const logout = () => {
@@ -77,7 +78,7 @@ const AvatarIcon = () => {
 		<>
 			{/* overlay在4.24.0版本之前可以使用，但是控制台会提示已被废弃，参考文档可以更新为menu属性 */}
 			<Dropdown overlay={menu} placement="bottom" arrow trigger={["click"]}>
-				<Avatar src={avatar}></Avatar>
+				<Avatar src={avatar} size="large"></Avatar>
 			</Dropdown>
 			<InfoModal innerRef={infoRef}></InfoModal>
 			<PasswordModal innerRef={passRef}></PasswordModal>

@@ -1,4 +1,5 @@
 import { defineConfig, loadEnv, ConfigEnv, UserConfig } from "vite";
+// import { Agent } from "node:http";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import { wrapperEnv } from "./src/utils/getEnv";
@@ -30,6 +31,7 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 		// server config
 		server: {
 			host: "0.0.0.0", // 服务器主机名，如果允许外部访问，可设置为"0.0.0.0"
+			// host: "127.0.0.1",
 			port: viteEnv.VITE_PORT,
 			open: viteEnv.VITE_OPEN,
 			cors: true,
@@ -42,6 +44,7 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 					target: "https://mock.mengxuegu.com/mock/62abda3212c1416424630a45", // easymock
 					changeOrigin: true,
 					rewrite: (path) => path.replace(/^\/api/, ""),
+					// agent: new Agent({ keepAlive: true, keepAliveMsecs: 20000 }),
 				},
 			},
 		},
