@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Logo from "./components/Logo";
 import { getOpenKeys } from "@/utils/utils";
 import { getMenuList } from "@/api/modules/login";
-import "./index.scss";
+import "./index.less";
 
 type MenuItem = Required<MenuProps>["items"][number];
 

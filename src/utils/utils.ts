@@ -19,13 +19,21 @@ export const getOpenKeys = (path: string) => {
  * 递归查询对应的路由
  *
  */
-export const searchRouteDetail = (path: string, routes: RouteObject[]): RouteObject | [] => {
-	let result: any;
-	for (let item of routes || []) {
-		if (item.path === path) return (result = item);
-		const res = searchRouteDetail(path, item.children!);
-		if (res) result = res;
-	}
+export const searchRouteDetail = (path: string, routes: RouteObject[]): string[] => {
+	let result: string[] = [];
+	routes.forEach((item) => {
+		if (item.path === path) {
+			result.push(item.meta!.title);
+		} else {
+			if (item.children && item.children.length > 0) {
+				item.children.forEach((i) => {
+					if (i.path === path) {
+						result.push(item.meta!.title, i.meta!.title);
+					}
+				});
+			}
+		}
+	});
 	return result;
 };
 

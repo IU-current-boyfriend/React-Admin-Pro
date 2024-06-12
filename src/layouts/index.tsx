@@ -5,7 +5,7 @@ import LayoutMenu from "./Menu";
 import LayoutHeader from "./Header";
 import LayoutTabs from "./Tabs";
 import LayoutFooter from "./Footer";
-import "./index.scss";
+import "./index.less";
 
 // 从antd中的Layout组件中解构出侧边栏、content组件
 const { Sider, Content } = Layout;

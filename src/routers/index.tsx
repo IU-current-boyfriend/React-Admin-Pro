@@ -9,16 +9,14 @@ const metaRoutes = import.meta.globEager("./modules/*.tsx");
 // console.log("meta: =>", metaRoutes);
 
 // 处理路由
-export const routerArray: RouteObject[] = [];
+const routerArray: RouteObject[] = [];
 
 Object.entries(metaRoutes).reduce((prev, [routeKey, route]) => {
 	routeKey && route.default && routerArray.push(...route.default);
 	return prev;
 }, routerArray);
 
-console.log("Array: =>", routerArray);
-
-const rootRouter: RouteObject[] = [
+export const rootRouter: RouteObject[] = [
 	{
 		path: "/",
 		element: <Navigate to="/login" />,

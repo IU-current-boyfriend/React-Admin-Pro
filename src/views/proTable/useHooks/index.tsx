@@ -1,4 +1,8 @@
 import { Table } from "antd";
+import { useLocation } from "react-router-dom";
+import { rootRouter } from "@/routers/index";
+import { searchRouteDetail } from "@/utils/utils";
+import "./index.less";
 
 const useHooks = () => {
 	const dataSource = [
@@ -32,6 +36,11 @@ const useHooks = () => {
 			key: "address",
 		},
 	];
+	const location = useLocation();
+
+	const res = searchRouteDetail(location.pathname, rootRouter);
+	console.log("res: =>", res);
+
 	return <Table dataSource={dataSource} columns={columns}></Table>;
 };
 

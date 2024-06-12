@@ -1,5 +1,5 @@
 import welcome from "@/assets/images/welcome.png";
-import "./index.scss";
+import "./index.less";
 
 const Home = () => {
 	return (
