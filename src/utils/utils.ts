@@ -16,6 +16,23 @@ export const getOpenKeys = (path: string) => {
 };
 
 /**
+ * 递归匹配某个路由信息
+ * @param path
+ * @param routes
+ */
+export const searchRoute = (path: string, routes: RouteObject[] = []): RouteObject => {
+	let result: RouteObject = {};
+	routes.forEach((route) => {
+		if (path === route.path) return (result = route);
+		if (route.children && route.children.length > 0) {
+			const item = searchRoute(path, route.children);
+			if (Object.keys(item).length) result = item;
+		}
+	});
+	return result;
+};
+
+/**
  *
  * @param path 当前路由路径
  * @param routes 全部的路由配置信息

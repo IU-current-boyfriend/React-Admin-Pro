@@ -1,7 +1,7 @@
 import { Table } from "antd";
-import { useLocation } from "react-router-dom";
-import { rootRouter } from "@/routers/index";
-import { searchRouteDetail } from "@/utils/utils";
+// import { useLocation } from "react-router-dom";
+// import { routerArray } from "@/routers/index";
+// import { searchRouteDetail } from "@/utils/utils";
 import "./index.less";
 
 const useHooks = () => {
@@ -36,10 +36,10 @@ const useHooks = () => {
 			key: "address",
 		},
 	];
-	const location = useLocation();
+	// const location = useLocation();
 
-	const res = searchRouteDetail(location.pathname, rootRouter);
-	console.log("res: =>", res);
+	// const res = searchRouteDetail(location.pathname, routerArray);
+	// console.log("res: =>", res);
 
 	return <Table dataSource={dataSource} columns={columns}></Table>;
 };

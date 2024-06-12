@@ -12,6 +12,7 @@ const dataScreenRouter: RouteObject[] = [
 				path: "/dataScreen/index",
 				element: lazyLoad(React.lazy(() => import("@/views/dataScreen"))),
 				meta: {
+					keepAlive: true,
 					requiresAuth: false,
 					title: "数据大屏",
 					key: "dataScreen",

@@ -7,7 +7,7 @@ import { RouteObject } from "@/routers/interface";
 const dashboardRouter: RouteObject[] = [
 	{
 		path: "/dashboard",
-		element: <LayoutIndex />,
+		element: <LayoutIndex title="dashboard" />,
 		meta: {
 			title: "Dashboard",
 		},

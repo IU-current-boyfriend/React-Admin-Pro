@@ -6,7 +6,7 @@ import { RouteObject } from "@/routers/interface";
 // 超级表格模块
 const proTableRouter: RouteObject[] = [
 	{
-		element: <LayoutIndex />,
+		element: <LayoutIndex title={"超级表格"} />,
 		meta: {
 			title: "超级表格",
 		},
