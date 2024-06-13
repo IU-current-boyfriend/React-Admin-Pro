@@ -12,6 +12,12 @@ export const updateCollapse = () => ({
 	type: types.UPDATE_COLLAPSE,
 });
 
+// * updateMenuList
+export const setMenuList = (menuList: Menu.MenuOptions) => ({
+	type: types.SET_MENU_LIST,
+	menuList,
+});
+
 // * redux-thunk
 export const getMenuListActionThunk = () => {
 	return async (dispatch: Dispatch<MenuProps>) => {

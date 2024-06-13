@@ -3,7 +3,7 @@ import { Spin, Menu, type MenuProps } from "antd";
 import { connect } from "react-redux";
 import * as Icons from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
-import { updateCollapse } from "@/redux/modules/menu/action";
+import { setMenuList } from "@/redux/modules/menu/action";
 import { getOpenKeys } from "@/utils/utils";
 import { getMenuList } from "@/api/modules/login";
 import Logo from "./components/Logo";
@@ -55,7 +55,8 @@ const LayoutMenu = (props: any) => {
 		setLoading(true);
 		try {
 			const { data } = await getMenuList();
-			data && setMenuList(deepLoopFloat(data));
+			if (!data) return;
+			setMenuList(deepLoopFloat(data));
 		} finally {
 			setLoading(false);
 		}
@@ -114,6 +115,6 @@ const LayoutMenu = (props: any) => {
 };
 
 const mapStateToProps = (state: any) => state.menu;
-const mapActionsToProps = () => ({ updateCollapse });
+const mapActionsToProps = () => ({ setMenuList });
 
 export default connect(mapStateToProps, mapActionsToProps)(LayoutMenu);
