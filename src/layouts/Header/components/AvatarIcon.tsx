@@ -38,7 +38,7 @@ const AvatarIcon = () => {
 							首页
 						</span>
 					),
-					key: "0",
+					key: "1",
 				},
 				{
 					label: (
@@ -46,7 +46,7 @@ const AvatarIcon = () => {
 							个人信息
 						</span>
 					),
-					key: "1",
+					key: "2",
 				},
 				{
 					label: (
@@ -54,7 +54,7 @@ const AvatarIcon = () => {
 							修改密码
 						</span>
 					),
-					key: "2",
+					key: "3",
 				},
 				// { 这种写法，导致onClick属性接受的类型不匹配,需要通过绑定函数来处理，不能够直接调用showModal方法
 				// 	label: <span onClick={passRef.current.showModal({ name: 222 })}>修改密码</span>,

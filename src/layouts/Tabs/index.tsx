@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Tabs } from "antd";
+import { Tabs, message } from "antd";
 import { HomeFilled } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { HOME_URL } from "@/config";
@@ -49,6 +49,7 @@ const LayoutTabs = () => {
 
 	const delTabs = (path: string) => {
 		console.log("path: =>", path);
+		message.success("删除Tabs标签😁");
 	};
 
 	return (

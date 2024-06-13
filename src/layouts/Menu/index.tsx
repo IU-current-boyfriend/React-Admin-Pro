@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Spin, Menu, type MenuProps } from "antd";
+import { connect } from "react-redux";
 import * as Icons from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
-import Logo from "./components/Logo";
+import { updateCollapse } from "@/redux/modules/menu/action";
 import { getOpenKeys } from "@/utils/utils";
 import { getMenuList } from "@/api/modules/login";
+import Logo from "./components/Logo";
 import "./index.less";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
-const LayoutMenu = () => {
+const LayoutMenu = (props: any) => {
 	const { pathname } = useLocation();
 	const [loading, setLoading] = useState<boolean>(false);
 	const [menuList, setMenuList] = useState<MenuItem[]>([]);
@@ -68,8 +70,8 @@ const LayoutMenu = () => {
 
 	useEffect(() => {
 		setSelectedKeys([pathname]);
-		setOpenKeys(getOpenKeys(pathname));
-	}, [pathname]);
+		props.isCollapse ? null : setOpenKeys(getOpenKeys(pathname));
+	}, [pathname, props.isCollapse]);
 
 	useEffect(() => {
 		getMenuData();
@@ -111,4 +113,7 @@ const LayoutMenu = () => {
 	);
 };
 
-export default LayoutMenu;
+const mapStateToProps = (state: any) => state.menu;
+const mapActionsToProps = () => ({ updateCollapse });
+
+export default connect(mapStateToProps, mapActionsToProps)(LayoutMenu);

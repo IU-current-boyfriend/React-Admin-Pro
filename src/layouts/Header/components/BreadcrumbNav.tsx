@@ -237,7 +237,7 @@ const BreadcrumNav = () => {
 		<Breadcrumb>
 			<Breadcrumb.Item href="#/home/index">首页</Breadcrumb.Item>
 			{breadcrumbList?.map((item) => {
-				return <Breadcrumb.Item key={item}>{item}</Breadcrumb.Item>;
+				return <Breadcrumb.Item key={item}>{item !== "首页" ? item : null}</Breadcrumb.Item>;
 			})}
 		</Breadcrumb>
 	);
