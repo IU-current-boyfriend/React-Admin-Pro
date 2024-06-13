@@ -60,6 +60,61 @@ export const searchRouteDetail = (path: string, routes: RouteObject[], result: s
 };
 
 /**
+ * 根据路由查询面包屑
+ */
+export const getBreadcrumbList = (path: string, routes: Menu.MenuOptions[], result: string[] = []) => {
+	const includeRouteDetail = (routeArr: Menu.MenuOptions[]): Menu.MenuOptions | undefined => {
+		return routeArr.find((item) => {
+			if (item.path === path) return true;
+			if (item.children && item.children.length > 0) return includeRouteDetail(item.children);
+		});
+	};
+
+	routes.forEach((route) => {
+		if (route.path === path) result.push(route.title);
+		if (route.children && route.children.length > 0) {
+			// 添加当前成功匹配到的路由信息
+			includeRouteDetail(route.children) && result.push(route.title);
+			// 递归只会添加匹配到的最后一个路由信息
+			getBreadcrumbList(path, route.children, result);
+		}
+	});
+
+	return result;
+};
+
+/**
+ * 另一种递归查询面包屑的方法
+ */
+// export const getBreadcrumbList = (path: string, menuList: Menu.MenuOptions[]) => {
+// 	let tempPath: any[] = [];
+// 	try {
+// 		const getNodePath = (node: Menu.MenuOptions) => {
+// 			tempPath.push(node);
+// 			// 找到符合条件的节点，通过throw终止掉递归
+// 			if (node.path === path) {
+// 				throw new Error("GOT IT!");
+// 			}
+// 			if (node.children && node.children.length > 0) {
+// 				for (let i = 0; i < node.children.length; i++) {
+// 					getNodePath(node.children[i]);
+// 				}
+// 				// 当前节点的子节点遍历完依旧没找到，则删除路径中的该节点
+// 				tempPath.pop();
+// 			} else {
+// 				// 找到叶子节点时，删除路径当中的该叶子节点
+// 				tempPath.pop();
+// 			}
+// 		};
+// 		for (let i = 0; i < menuList.length; i++) {
+// 			getNodePath(menuList[i]);
+// 		}
+// 	} catch (e) {
+// 		return tempPath.map((item) => item.title);
+// 	}
+// };
+
+/**
  * @description 判断数据类型
  * @param val 需要判断类型的数据
  * @returns {string} 数据类型

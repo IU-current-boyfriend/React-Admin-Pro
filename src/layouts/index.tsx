@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { connect } from "react-redux";
 import { Layout } from "antd";
 import LayoutMenu from "./Menu";
 import LayoutHeader from "./Header";
@@ -10,14 +11,14 @@ import "./index.less";
 // 从antd中的Layout组件中解构出侧边栏、content组件
 const { Sider, Content } = Layout;
 
-const LayoutIndex = (props: { name?: string }) => {
+const LayoutIndex = (props: any) => {
 	console.log("props: =>", props);
 	const { pathname } = useLocation();
 
 	return (
 		// <Layout>
 		<section className="container">
-			<Sider trigger={null} collapsed={false} width={200} theme="dark">
+			<Sider trigger={null} collapsed={props.isCollapse} width={210} theme="dark">
 				<LayoutMenu></LayoutMenu>
 			</Sider>
 			<Layout>
@@ -38,4 +39,5 @@ const LayoutIndex = (props: { name?: string }) => {
 		// </Layout>
 	);
 };
-export default LayoutIndex;
+const mapStateToProps = (state: any) => state.menu;
+export default connect(mapStateToProps)(LayoutIndex);
