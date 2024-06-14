@@ -2,48 +2,27 @@ import { useEffect, useState } from "react";
 import { Tabs, message } from "antd";
 import { HomeFilled } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
 import { HOME_URL } from "@/config";
+import { addTabs } from "@/redux/modules/tabs/action";
+import { routerArray } from "@/routers";
+import { searchRoute } from "@/utils/utils";
 import "./index.less";
 
-const LayoutTabs = () => {
+const LayoutTabs = (props: any) => {
 	const { TabPane } = Tabs;
 	const { pathname } = useLocation();
 	const [activeKey, setActiveKey] = useState<string>(pathname);
-	const [tabList] = useState([
-		{
-			title: "首页",
-			path: "/home/index",
-		},
-		{
-			title: "数据大屏",
-			path: "/dataScreen/index",
-		},
-		{
-			title: "使用 Hooks",
-			path: "/proTable/useHooks",
-		},
-		{
-			title: "使用 Component",
-			path: "/proTable/useComponent",
-		},
-		{
-			title: "数据可视化",
-			path: "/dashboard/dataVisualize",
-		},
-		{
-			title: "内嵌页面",
-			path: "/dashboard/embedded",
-		},
-	]);
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		// 通过pathname从路由配置中查询当前路由的信息，设置为tab栏
+		const route = searchRoute(pathname, routerArray);
+		props.addTabs({ title: route.meta!.title, path: route.path });
 		setActiveKey(pathname);
 	}, [pathname]);
 
 	const tabsClick = (path: string) => {
-		// console.log("navigate: =>", navigate);
-		// console.log("index: =>", path);
 		navigate(path);
 	};
 
@@ -62,7 +41,7 @@ const LayoutTabs = () => {
 			}}
 			hideAdd
 		>
-			{tabList.map((item: Menu.MenuOptions) => {
+			{props.tabsList.map((item: Menu.MenuOptions) => {
 				return (
 					<TabPane
 						key={item.path}
@@ -80,4 +59,14 @@ const LayoutTabs = () => {
 	);
 };
 
-export default LayoutTabs;
+const mapStateToProps = (state: any) => state.tabs;
+/*
+	mapActionToProps是对象的情况，而不是函数的情况，需要去官网看一下: 官网指出:
+	connect 的 mapDispatch 参数可以定义为接收 dispatch 参数的函数，
+	也可以定义为包含 action creator 的对象。我们建议总是使用 mapDispatch 的“对象简写”格式 ，
+	因为这样极大地简化了代码。几乎不需要将 mapDispatch 写为函数。
+ */
+
+const mapActionToProps = { addTabs };
+
+export default connect(mapStateToProps, mapActionToProps)(LayoutTabs);

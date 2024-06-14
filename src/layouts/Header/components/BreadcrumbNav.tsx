@@ -232,7 +232,6 @@ const BreadcrumNav = () => {
 	];
 	const breadcrumbList = getBreadcrumbList(pathname, menuList);
 
-	console.log("breadcrumbList: =>", breadcrumbList);
 	return (
 		<Breadcrumb>
 			<Breadcrumb.Item href="#/home/index">首页</Breadcrumb.Item>

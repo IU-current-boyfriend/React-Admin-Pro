@@ -12,7 +12,6 @@ import "./index.less";
 const { Sider, Content } = Layout;
 
 const LayoutIndex = (props: any) => {
-	console.log("props: =>", props);
 	const { pathname } = useLocation();
 
 	return (

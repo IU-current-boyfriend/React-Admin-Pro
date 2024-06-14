@@ -5,10 +5,12 @@ import { applyMiddleware } from "redux"; // 应用中间件方法
 import reduxThunk from "redux-thunk";
 import reduxPromise from "redux-promise";
 import menu from "./modules/menu/reducer";
+import tabs from "./modules/tabs/reducer";
 
 // 创建reducer(拆分reducer)
 const reducer = combineReducers({
 	menu,
+	tabs,
 });
 
 // redux 持久化配置
