@@ -4,9 +4,11 @@ import { connect } from "react-redux";
 import * as Icons from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { setMenuList } from "@/redux/modules/menu/action";
+import { setBreadcrumbList } from "@/redux/modules/breadcrumb/action";
 import { getOpenKeys } from "@/utils/utils";
 import { getMenuList } from "@/api/modules/login";
 import Logo from "./components/Logo";
+import { findAllBreadcrumb } from "@/utils/utils";
 import "./index.less";
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -57,6 +59,8 @@ const LayoutMenu = (props: any) => {
 			const { data } = await getMenuList();
 			if (!data) return;
 			setMenuList(deepLoopFloat(data));
+			// 储存处理过后的所有面包屑导航到redux中
+			props.setBreadcrumbList(findAllBreadcrumb(data));
 		} finally {
 			setLoading(false);
 		}
@@ -115,6 +119,9 @@ const LayoutMenu = (props: any) => {
 };
 
 const mapStateToProps = (state: any) => state.menu;
-const mapActionsToProps = () => ({ setMenuList });
+const mapActionsToProps = {
+	setMenuList,
+	setBreadcrumbList,
+};
 
 export default connect(mapStateToProps, mapActionsToProps)(LayoutMenu);

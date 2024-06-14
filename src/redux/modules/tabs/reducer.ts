@@ -17,10 +17,8 @@ const tabsState: TabsState = {
 const tabs = (state: TabsState = tabsState, action: AnyAction) =>
 	produce(state, (draftState) => {
 		switch (action.type) {
-			case types.ADD_TABS:
-				if (draftState.tabsList.every((item) => item.path !== action.tabItem.path)) {
-					draftState.tabsList.push(action.tabItem);
-				}
+			case types.SET_TABS_LIST:
+				draftState.tabsList = action.tabsList;
 				break;
 			case types.SET_TABS_ACTIVE:
 				draftState.tabsActive = action.tabsActive;

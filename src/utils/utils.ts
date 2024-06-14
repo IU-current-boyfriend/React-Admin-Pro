@@ -115,6 +115,21 @@ export const getBreadcrumbList = (path: string, routes: Menu.MenuOptions[], resu
 // };
 
 /**
+ * 根据菜单数据储存所有的面包屑数据
+ *
+ *
+ */
+export const findAllBreadcrumb = (menuList: Menu.MenuOptions[]): { [key: string]: any } => {
+	let handleBreadcrumbList: any = {};
+	const loop = (menuItem: Menu.MenuOptions) => {
+		if (menuItem?.children?.length) menuItem.children.forEach((item) => loop(item));
+		else handleBreadcrumbList[menuItem.path] = getBreadcrumbList(menuItem.path, menuList);
+	};
+	menuList.forEach((item) => loop(item));
+	return handleBreadcrumbList;
+};
+
+/**
  * @description 判断数据类型
  * @param val 需要判断类型的数据
  * @returns {string} 数据类型

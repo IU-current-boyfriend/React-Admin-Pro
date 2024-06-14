@@ -4,7 +4,7 @@ import { HomeFilled } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { HOME_URL } from "@/config";
-import { addTabs } from "@/redux/modules/tabs/action";
+import { setTabsList } from "@/redux/modules/tabs/action";
 import { routerArray } from "@/routers";
 import { searchRoute } from "@/utils/utils";
 import "./index.less";
@@ -16,19 +16,37 @@ const LayoutTabs = (props: any) => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		// 通过pathname从路由配置中查询当前路由的信息，设置为tab栏
-		const route = searchRoute(pathname, routerArray);
-		props.addTabs({ title: route.meta!.title, path: route.path });
+		addTabs();
 		setActiveKey(pathname);
 	}, [pathname]);
+
+	// addTabs
+	const addTabs = () => {
+		const route = searchRoute(pathname, routerArray);
+		let tabsList = JSON.parse(JSON.stringify(props.tabsList));
+		if (props.tabsList.every((item: any) => item.path !== route.path)) {
+			tabsList.push({ title: route.meta!.title, path: route.path });
+		}
+		props.setTabsList(tabsList);
+		setActiveKey(pathname);
+	};
 
 	const tabsClick = (path: string) => {
 		navigate(path);
 	};
 
 	const delTabs = (path: string) => {
-		console.log("path: =>", path);
+		if (path === pathname) {
+			props.tabsList.forEach((item: Menu.MenuOptions, index: number) => {
+				if (item.path !== path) return;
+				// 目的根据当前路由的path和点击的path找出需要跳转的路由
+				const nextTab = props.tabsList[index + 1] || props.tabsList[index - 1];
+				if (!nextTab) return;
+				navigate(nextTab.path);
+			});
+		}
 		message.success("删除Tabs标签😁");
+		props.setTabsList(props.tabsList.filter((item: Menu.MenuOptions) => item.path !== path));
 	};
 
 	return (
@@ -67,6 +85,6 @@ const mapStateToProps = (state: any) => state.tabs;
 	因为这样极大地简化了代码。几乎不需要将 mapDispatch 写为函数。
  */
 
-const mapActionToProps = { addTabs };
+const mapActionToProps = { setTabsList };
 
 export default connect(mapStateToProps, mapActionToProps)(LayoutTabs);

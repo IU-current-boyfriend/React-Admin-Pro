@@ -6,7 +6,7 @@ export const SET_MENU_LIST = "SET_MENU_LIST";
 export const SET_TABS_LIST = "SET_TABS_LIST";
 // 设置 token
 export const SET_TOKEN = "SET_TOKEN";
-// 添加tabs
-export const ADD_TABS = "ADD_TABS";
 // 设置tabsActive
 export const SET_TABS_ACTIVE = "SET_TABS_ACTIVE";
+// 设置breadcrumb
+export const SET_BREADCRUMB_LIST = "SET_BREADCRUMB_LIST";
