@@ -49,6 +49,7 @@ const LayoutIndex = (props: any) => {
 				<LayoutTabs></LayoutTabs>
 				<Content>
 					{/* 这里样式暂时并未设置fade滑动效果，类名虽然设置了，但还未实现 */}
+					{/*  */}
 					<TransitionGroup className="content">
 						{/* exit: 表示退出当前页面的时候是否有动画 */}
 						<CSSTransition timeout={200} classNames="fade" exit={false} key={pathname}>
