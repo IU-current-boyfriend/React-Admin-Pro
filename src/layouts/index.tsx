@@ -4,6 +4,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { connect } from "react-redux";
 import { Layout } from "antd";
 import { setAuthButtons } from "@/redux/modules/auth/action";
+import { updateCollapse } from "@/redux/modules/menu/action";
 import { getAuthorButtons } from "@/api/modules/login";
 import LayoutMenu from "./Menu";
 import LayoutHeader from "./Header";
@@ -21,8 +22,20 @@ const LayoutIndex = (props: any) => {
 		props.setAuthButtons(data);
 	};
 
+	// 监听窗口的变化
+	const listeningWindow = () => {
+		window.onresize = () => {
+			return (() => {
+				let screenWidth = document.body.clientWidth;
+				if (props.isCollapse === false && screenWidth < 1200) props.updateCollapse(true);
+				if (props.isCollapse === false && screenWidth >= 1200) props.updateCollapse(false);
+			})();
+		};
+	};
+
 	useEffect(() => {
 		getAuthorButtonsData();
+		listeningWindow();
 	}, []);
 
 	return (
@@ -50,5 +63,5 @@ const LayoutIndex = (props: any) => {
 	);
 };
 const mapStateToProps = (state: any) => state.menu;
-const mapActionsToProps = { setAuthButtons };
+const mapActionsToProps = { setAuthButtons, updateCollapse };
 export default connect(mapStateToProps, mapActionsToProps)(LayoutIndex);

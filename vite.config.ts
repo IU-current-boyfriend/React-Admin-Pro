@@ -76,17 +76,24 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 					ext: ".gz",
 				}),
 		],
+		esbuild: {
+			pure: viteEnv.VITE_DROP_CONSOLE ? ["console.log", "debugger"] : [],
+		},
 		// build configure
 		build: {
 			outDir: "dist",
-			minify: "terser",
-			terserOptions: {
-				// delete console/debugger
-				compress: {
-					drop_console: viteEnv.VITE_DROP_CONSOLE,
-					drop_debugger: true,
-				},
-			},
+			/**
+			 * esbuild打包更快，但是不能去除console.log,去除console使用terser模式
+			 */
+			// minify: "terser",
+			// terserOptions: {
+			// 	// delete console/debugger
+			// 	compress: {
+			// 		drop_console: viteEnv.VITE_DROP_CONSOLE,
+			// 		drop_debugger: true,
+			// 	},
+			// },
+			minify: "esbuild",
 			rollupOptions: {
 				output: {
 					// Static resource classification and packaging

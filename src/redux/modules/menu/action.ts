@@ -8,8 +8,9 @@ interface MenuProps {
 }
 
 // * updateCollapse
-export const updateCollapse = () => ({
+export const updateCollapse = (isCollapse: boolean) => ({
 	type: types.UPDATE_COLLAPSE,
+	isCollapse,
 });
 
 // * updateMenuList
