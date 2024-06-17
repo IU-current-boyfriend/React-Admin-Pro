@@ -129,6 +129,14 @@ export const findAllBreadcrumb = (menuList: Menu.MenuOptions[]): { [key: string]
 	return handleBreadcrumbList;
 };
 
+export function handleRouter(routerList: Menu.MenuOptions[], newArr: string[] = []) {
+	routerList.forEach((item: Menu.MenuOptions) => {
+		typeof item === "object" && item.path && newArr.push(item.path);
+		item.children && item.children.length && handleRouter(item.children, newArr);
+	});
+	return newArr;
+}
+
 /**
  * @description 判断数据类型
  * @param val 需要判断类型的数据

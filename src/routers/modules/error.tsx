@@ -1,5 +1,5 @@
 import React from "react";
-import lazyLoad from "@/routers/lazyLoad";
+import lazyLoad from "@/routers/utils/lazyLoad";
 import { RouteObject } from "@/routers/interface";
 
 // 错误页面路由模块

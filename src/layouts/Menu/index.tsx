@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 import * as Icons from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { setMenuList } from "@/redux/modules/menu/action";
+import { setAuthRouters } from "@/redux/modules/auth/action";
 import { setBreadcrumbList } from "@/redux/modules/breadcrumb/action";
-import { getOpenKeys } from "@/utils/utils";
+import { getOpenKeys, handleRouter } from "@/utils/utils";
 import { getMenuList } from "@/api/modules/login";
 import Logo from "./components/Logo";
 import { findAllBreadcrumb } from "@/utils/utils";
@@ -61,6 +62,9 @@ const LayoutMenu = (props: any) => {
 			setMenuList(deepLoopFloat(data));
 			// 储存处理过后的所有面包屑导航到redux中
 			props.setBreadcrumbList(findAllBreadcrumb(data));
+			// 把路由菜单处理成一维数组，存储到redux中，做菜单权限校验
+			const dynamicRouter = handleRouter(data);
+			props.setAuthRouters(dynamicRouter);
 		} finally {
 			setLoading(false);
 		}
@@ -122,6 +126,7 @@ const mapStateToProps = (state: any) => state.menu;
 const mapActionsToProps = {
 	setMenuList,
 	setBreadcrumbList,
+	setAuthRouters,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(LayoutMenu);

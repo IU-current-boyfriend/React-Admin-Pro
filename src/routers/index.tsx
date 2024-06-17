@@ -1,4 +1,5 @@
-import { Navigate, useRoutes } from "react-router-dom";
+// import { Navigate, useRoutes } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { RouteObject } from "@/routers/interface";
 
 // Login、LayoutIndex没有必要懒加载
@@ -27,7 +28,7 @@ const rootRouter: RouteObject[] = [
 		// meta的作用，可以用做路由跳转携带的信息，比如说requiresAuth字段，如果存在的话
 		// 就可以当作用户已经登录，如果不存在则没有登录
 		meta: {
-			requiresAuth: true,
+			requiresAuth: false,
 			title: "登录页",
 			key: "login",
 		},
@@ -39,10 +40,10 @@ const rootRouter: RouteObject[] = [
 	},
 ];
 
-const Router = () => {
-	// useRoutes返回的是React.ReactElement react元素；
-	const routes = useRoutes(rootRouter);
-	return routes;
-};
+// const Router = () => {
+// 	// useRoutes返回的是React.ReactElement react元素；
+// 	const routes = useRoutes(rootRouter);
+// 	return routes;
+// };
 
-export default Router;
+export default rootRouter;
