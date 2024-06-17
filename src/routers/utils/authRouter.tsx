@@ -3,10 +3,14 @@ import { routerArray } from "@/routers/index";
 import { searchRoute } from "@/utils/utils";
 import { store } from "@/redux/index";
 import { HOME_URL } from "@/config";
+import AxiosCancel from "@/api/helper/axiosCancel";
 
 const AuthRouter = (props: any) => {
 	const { pathname } = useLocation();
 	const route = searchRoute(pathname, routerArray);
+
+	// * 在跳转路由之前，清楚所有的请求
+	AxiosCancel.removeAllPending();
 
 	// * 判断当前路由是否需要访问权限（不需要权限直接放行路由）
 	if (!route.meta?.requiresAuth) return props.children;
