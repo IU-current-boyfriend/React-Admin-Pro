@@ -3,7 +3,6 @@ import { Spin, Menu, type MenuProps } from "antd";
 import { connect } from "react-redux";
 import * as Icons from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
-import { setMenuList } from "@/redux/modules/menu/action";
 import { setAuthRouters } from "@/redux/modules/auth/action";
 import { setBreadcrumbList } from "@/redux/modules/breadcrumb/action";
 import { getOpenKeys, handleRouter } from "@/utils/utils";
@@ -105,8 +104,8 @@ const LayoutMenu = (props: any) => {
 
 	return (
 		<div className="menu">
-			<Logo></Logo>
 			<Spin tip="loading..." spinning={loading}>
+				<Logo></Logo>
 				<Menu
 					theme="dark"
 					mode="inline"
@@ -124,7 +123,6 @@ const LayoutMenu = (props: any) => {
 
 const mapStateToProps = (state: any) => state.menu;
 const mapActionsToProps = {
-	setMenuList,
 	setBreadcrumbList,
 	setAuthRouters,
 };
