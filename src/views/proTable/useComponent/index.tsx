@@ -7,7 +7,11 @@ const useComponent = () => {
 
 	// const res = searchRouteDetail(location.pathname, routerArray);
 	// console.log("res: =>", res);
-	return <span>UseComponent</span>;
+	return (
+		<div className="content-box">
+			<span className="text">UseComponent 🍓🍇🍈🍉</span>
+		</div>
+	);
 };
 
 export default useComponent;

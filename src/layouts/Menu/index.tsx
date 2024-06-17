@@ -5,7 +5,7 @@ import * as Icons from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { setAuthRouters } from "@/redux/modules/auth/action";
 import { setBreadcrumbList } from "@/redux/modules/breadcrumb/action";
-import { getOpenKeys, handleRouter } from "@/utils/utils";
+import { getOpenKeys, handleRouter, searchRoute } from "@/utils/utils";
 import { getMenuList } from "@/api/modules/login";
 import Logo from "./components/Logo";
 import { findAllBreadcrumb } from "@/utils/utils";
@@ -91,6 +91,9 @@ const LayoutMenu = (props: any) => {
 	 * @param e
 	 */
 	const clickMenu: MenuProps["onClick"] = ({ key }: { key: string }) => {
+		const route = searchRoute(key, props.menuList);
+		/* 实际上这里并不会跳转，因为按照现在的代码逻辑menuList在Redux中没有储存值。 */
+		if (route.isLink) window.open(route.isLink, "_blank");
 		navigate(key);
 	};
 

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { Outlet } from "react-router-dom";
+// import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { connect } from "react-redux";
 import { Layout } from "antd";
 import { setAuthButtons } from "@/redux/modules/auth/action";
@@ -13,7 +13,7 @@ import LayoutFooter from "./Footer";
 import "./index.less";
 
 const LayoutIndex = (props: any) => {
-	const { pathname } = useLocation();
+	// const { pathname } = useLocation();
 	// 从antd中的Layout组件中解构出侧边栏、content组件
 	const { Sider, Content } = Layout;
 
@@ -48,14 +48,14 @@ const LayoutIndex = (props: any) => {
 				<LayoutHeader></LayoutHeader>
 				<LayoutTabs></LayoutTabs>
 				<Content>
-					{/* 这里样式暂时并未设置fade滑动效果，类名虽然设置了，但还未实现 */}
-					{/*  */}
+					{/* TransitionGroup会导致useEffect加载两次，后期再解决 && 使用路由懒加载第一次进入没有动画 
 					<TransitionGroup className="content">
-						{/* exit: 表示退出当前页面的时候是否有动画 */}
+						 exit: 表示退出当前页面的时候是否有动画 
 						<CSSTransition timeout={200} classNames="fade" exit={false} key={pathname}>
 							<Outlet></Outlet>
 						</CSSTransition>
-					</TransitionGroup>
+					</TransitionGroup> */}
+					<Outlet></Outlet>
 				</Content>
 				<LayoutFooter></LayoutFooter>
 			</Layout>
