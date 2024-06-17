@@ -1,5 +1,5 @@
 // import { Navigate, useRoutes } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import { Navigate, useRoutes } from "react-router-dom";
 import { RouteObject } from "@/routers/interface";
 
 // Login、LayoutIndex没有必要懒加载
@@ -40,10 +40,11 @@ const rootRouter: RouteObject[] = [
 	},
 ];
 
-// const Router = () => {
-// 	// useRoutes返回的是React.ReactElement react元素；
-// 	const routes = useRoutes(rootRouter);
-// 	return routes;
-// };
+const Router = () => {
+	// useRoutes返回的是React.ReactElement react元素；
+	const routes = useRoutes(rootRouter);
+	return routes;
+};
 
-export default rootRouter;
+// export default rootRouter;
+export default Router;
