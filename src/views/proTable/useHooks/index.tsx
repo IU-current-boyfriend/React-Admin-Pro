@@ -1,10 +1,13 @@
+import { useEffect } from "react";
+import { connect } from "react-redux";
 import { Table } from "antd";
-// import { useLocation } from "react-router-dom";
-// import { routerArray } from "@/routers/index";
-// import { searchRouteDetail } from "@/utils/utils";
 import "./index.less";
 
-const useHooks = () => {
+const useHooks = (props: any) => {
+	useEffect(() => {
+		console.log(props.authButtons);
+	}, []);
+
 	const dataSource = [
 		{
 			key: "1",
@@ -36,12 +39,9 @@ const useHooks = () => {
 			key: "address",
 		},
 	];
-	// const location = useLocation();
-
-	// const res = searchRouteDetail(location.pathname, routerArray);
-	// console.log("res: =>", res);
 
 	return <Table dataSource={dataSource} columns={columns}></Table>;
 };
 
-export default useHooks;
+const mapStateToProps = (state: any) => state.auth;
+export default connect(mapStateToProps)(useHooks);
