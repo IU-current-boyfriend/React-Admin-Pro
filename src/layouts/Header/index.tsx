@@ -8,9 +8,8 @@ import Language from "./components/Language";
 import Theme from "./components/Theme";
 import "./index.less";
 
-const { Header } = Layout;
-
 const LayoutHeader = () => {
+	const { Header } = Layout;
 	return (
 		<Header>
 			<div className="header-lf">

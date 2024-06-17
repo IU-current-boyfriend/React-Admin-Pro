@@ -6,6 +6,7 @@ import { ResultEnum } from "@/enums/httpEnum";
 import { checkStatus } from "./helper/checkStatus";
 import axiosCanceler from "./helper/axiosCancel";
 import { showFullScreenLoading, tryHideFullScreenLoading } from "@/config/serviceLoading";
+import { store } from "@/redux";
 
 const config = {
 	// 默认地址
@@ -42,7 +43,8 @@ class RequestHttp {
 				config.headers!.noLoading || showFullScreenLoading();
 				// const token: string = store.getState().global.token;
 				// const token: string = "123456";
-				const token: string = "bqddxxwqmfncffacvbpkuxvwvqrhln";
+				// const token: string = "bqddxxwqmfncffacvbpkuxvwvqrhln";
+				const token: string = store.getState().global.token;
 				return { ...config, headers: { "x-access-token": token } };
 			},
 			(error: AxiosError) => {

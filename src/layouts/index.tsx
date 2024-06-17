@@ -1,18 +1,29 @@
+import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { connect } from "react-redux";
 import { Layout } from "antd";
+import { setAuthButtons } from "@/redux/modules/auth/action";
+import { getAuthorButtons } from "@/api/modules/login";
 import LayoutMenu from "./Menu";
 import LayoutHeader from "./Header";
 import LayoutTabs from "./Tabs";
 import LayoutFooter from "./Footer";
 import "./index.less";
 
-// 从antd中的Layout组件中解构出侧边栏、content组件
-const { Sider, Content } = Layout;
-
 const LayoutIndex = (props: any) => {
 	const { pathname } = useLocation();
+	// 从antd中的Layout组件中解构出侧边栏、content组件
+	const { Sider, Content } = Layout;
+
+	const getAuthorButtonsData = async () => {
+		const { data } = await getAuthorButtons();
+		props.setAuthButtons(data);
+	};
+
+	useEffect(() => {
+		getAuthorButtonsData();
+	}, []);
 
 	return (
 		// <Layout>
@@ -39,4 +50,5 @@ const LayoutIndex = (props: any) => {
 	);
 };
 const mapStateToProps = (state: any) => state.menu;
-export default connect(mapStateToProps)(LayoutIndex);
+const mapActionsToProps = { setAuthButtons };
+export default connect(mapStateToProps, mapActionsToProps)(LayoutIndex);
