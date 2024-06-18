@@ -7,6 +7,7 @@ import "@/styles/reset.less";
 import "@/styles/common.less";
 import "@/assets/iconfont/iconfont.less";
 import "antd/dist/antd.css";
+import "@/language/index";
 import App from "@/App";
 
 // // react18创建会导致antd菜单折叠时闪烁，等待官方修复

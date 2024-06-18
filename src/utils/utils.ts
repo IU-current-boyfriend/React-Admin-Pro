@@ -169,3 +169,41 @@ export const deepCopy = <T>(obj: any): T => {
 	}
 	return newObj;
 };
+
+/**
+ * 获取localStorage
+ * @param key Storage名称
+ * @returns string
+ */
+export const localGet = (key: string) => {
+	const value = window.localStorage.getItem(key);
+	try {
+		return JSON.parse(window.localStorage.getItem(key) as string);
+	} catch (error) {
+		return value;
+	}
+};
+
+/**
+ * 存储localStorage
+ * @param key storage名称
+ * @param value Storage值
+ */
+export const localSet = (key: string, value: any) => {
+	window.localStorage.setItem(key, JSON.stringify(value));
+};
+
+/**
+ * 清除localStorage
+ * @param key Storage名称
+ */
+export const localRemove = (key: string) => {
+	window.localStorage.removeItem(key);
+};
+
+/**
+ * 清除所有的localStorage
+ */
+export const localClear = () => {
+	window.localStorage.clear();
+};

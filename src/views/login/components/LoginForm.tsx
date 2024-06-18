@@ -1,4 +1,4 @@
-import { md5 } from "js-md5";
+import md5 from "js-md5";
 import { useState } from "react";
 import { Form, Input, Button, message } from "antd";
 import { UserOutlined, LockOutlined, CloseCircleOutlined } from "@ant-design/icons";
