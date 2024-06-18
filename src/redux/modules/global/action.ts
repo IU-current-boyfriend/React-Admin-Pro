@@ -6,3 +6,10 @@ export const setToken = (token: string) => ({
 	type: types.SET_TOKEN,
 	token,
 });
+
+// * setAssemblySize
+
+export const setAssemblySize = (assemblySize: string) => ({
+	type: types.SET_ASSEMBLY_SIZE,
+	assemblySize,
+});

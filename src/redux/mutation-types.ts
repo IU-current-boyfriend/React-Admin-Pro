@@ -14,3 +14,5 @@ export const SET_BREADCRUMB_LIST = "SET_BREADCRUMB_LIST";
 export const SET_AUTH_BUTTON = "SET_AUTH_BUTTON";
 // 设置authRouter
 export const SET_AUTH_ROUTER = "SET_AUTH_ROUTER";
+// 设置assemblySize
+export const SET_ASSEMBLY_SIZE = "SET_ASSEMBLY_SIZE";

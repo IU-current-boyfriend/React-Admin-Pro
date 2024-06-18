@@ -6,7 +6,7 @@ import * as types from "@/redux/mutation-types";
 const globalState: GlobalState = {
 	token: "",
 	userInfo: "",
-	assemblySize: "default",
+	assemblySize: "middle",
 	language: "",
 	themeConfig: {
 		// 默认的primary主题颜色，
@@ -23,6 +23,9 @@ const global = (state: GlobalState = globalState, action: AnyAction) =>
 		switch (action.type) {
 			case types.SET_TOKEN:
 				draftState.token = action.token;
+				break;
+			case types.SET_ASSEMBLY_SIZE:
+				draftState.assemblySize = action.assemblySize;
 				break;
 			default:
 				break;

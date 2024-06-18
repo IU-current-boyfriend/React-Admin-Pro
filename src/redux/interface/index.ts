@@ -1,3 +1,5 @@
+import type { SizeType } from "antd/lib/config-provider/SizeContext";
+
 export interface MenuState {
 	isCollapse: boolean;
 	menuList: Menu.MenuOptions[];
@@ -22,7 +24,7 @@ export interface ThemeConfigProp {
 export interface GlobalState {
 	token: string;
 	userInfo: any;
-	assemblySize: string;
+	assemblySize: SizeType;
 	language: string;
 	themeConfig: ThemeConfigProp;
 }

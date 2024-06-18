@@ -1,27 +1,14 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { Table } from "antd";
+import { Table, DatePicker } from "antd";
 import "./index.less";
 
 const useHooks = (props: any) => {
+	const { RangePicker } = DatePicker;
 	useEffect(() => {
 		console.log(props.authButtons);
 	}, []);
 
-	const dataSource = [
-		{
-			key: "1",
-			name: "胡彦斌",
-			age: 32,
-			address: "西湖区湖底公园1号",
-		},
-		{
-			key: "2",
-			name: "胡彦祖",
-			age: 42,
-			address: "西湖区湖底公园1号",
-		},
-	];
 	const columns = [
 		{
 			title: "姓名",
@@ -40,7 +27,12 @@ const useHooks = (props: any) => {
 		},
 	];
 
-	return <Table dataSource={dataSource} columns={columns}></Table>;
+	return (
+		<>
+			<RangePicker />
+			<Table dataSource={[]} columns={columns}></Table>
+		</>
+	);
 };
 
 const mapStateToProps = (state: any) => state.auth;

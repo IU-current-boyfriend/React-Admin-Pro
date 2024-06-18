@@ -1,4 +1,5 @@
 import axios, { type AxiosRequestConfig, type AxiosInstance, type AxiosError, type AxiosResponse } from "axios";
+import NProgress from "@/config/nprogress";
 // import { useNavigate } from "react-router-dom";
 import { message } from "antd";
 import { ResultData } from "./interface";
@@ -33,6 +34,7 @@ class RequestHttp {
 		 */
 		this.service.interceptors.request.use(
 			(config: AxiosRequestConfig) => {
+				NProgress.start();
 				/**
 				 * 将当前请求添加到pending中
 				 */
@@ -59,7 +61,7 @@ class RequestHttp {
 		this.service.interceptors.response.use(
 			(response: AxiosResponse) => {
 				const { data, config } = response;
-
+				NProgress.done();
 				// const navigate = useNavigate(); // hooks只能在react组件中使用，所以这里使用会报错，用最原始的api处理
 				/* 在请求结束后，移除本次请求(关闭loading)*/
 				axiosCanceler.removePending(config);
@@ -87,6 +89,7 @@ class RequestHttp {
 			},
 			async (error: AxiosError) => {
 				const { response } = error;
+				NProgress.done();
 				tryHideFullScreenLoading();
 				// 根据响应的错误状态码，做不同的处理
 				if (response) return checkStatus(response.status);

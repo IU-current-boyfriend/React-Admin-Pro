@@ -1,32 +1,50 @@
 // import { LayoutOutlined } from "@ant-design/icons";
-import { Tooltip, Dropdown, Menu } from "antd";
+import { Dropdown, Menu } from "antd";
+import { setAssemblySize } from "@/redux/modules/global/action";
+import { connect } from "react-redux";
 
-const AssemblySize = () => {
+const AssemblySize = (props: any) => {
 	const menu = (
 		<Menu
 			items={[
 				{
-					key: "1",
+					key: "middle",
+					disabled: props.assemblySize === "middle",
 					label: <span>默认</span>,
+					onClick: (e) => {
+						console.log("e", e);
+						props.setAssemblySize(e.key);
+					},
 				},
 				{
-					key: "2",
+					key: "large",
+					disabled: props.assemblySize === "large",
 					label: <span>大型</span>,
+					onClick: (e) => {
+						console.log("e", e);
+						props.setAssemblySize(e.key);
+					},
 				},
 				{
-					key: "3",
+					key: "small",
+					disabled: props.assemblySize === "small",
 					label: <span>小型</span>,
+					onClick: (e) => {
+						console.log("e", e);
+						props.setAssemblySize(e.key);
+					},
 				},
 			]}
 		/>
 	);
 	return (
 		<Dropdown overlay={menu} placement="bottom" trigger={["click"]} arrow={true}>
-			<Tooltip placement="bottom" title={"组件大小"}>
-				<i className="icon-style iconfont icon-contentright"></i>
-			</Tooltip>
+			<i className="icon-style iconfont icon-contentright"></i>
 		</Dropdown>
 	);
 };
 
-export default AssemblySize;
+const mapStateToProps = (state: any) => state.global;
+const mapActionToProps = { setAssemblySize };
+
+export default connect(mapStateToProps, mapActionToProps)(AssemblySize);
