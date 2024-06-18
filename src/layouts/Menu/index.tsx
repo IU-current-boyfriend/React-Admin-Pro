@@ -5,6 +5,7 @@ import * as Icons from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { setAuthRouters } from "@/redux/modules/auth/action";
 import { setBreadcrumbList } from "@/redux/modules/breadcrumb/action";
+import { setMenuList } from "@/redux/modules/menu/action";
 import { getOpenKeys, handleRouter, searchRoute } from "@/utils/utils";
 import { getMenuList } from "@/api/modules/login";
 import Logo from "./components/Logo";
@@ -64,6 +65,8 @@ const LayoutMenu = (props: any) => {
 			// 把路由菜单处理成一维数组，存储到redux中，做菜单权限校验
 			const dynamicRouter = handleRouter(data);
 			props.setAuthRouters(dynamicRouter);
+			// 将menu存储到redux中
+			props.setMenuList(data);
 		} finally {
 			setLoading(false);
 		}
@@ -128,6 +131,7 @@ const mapStateToProps = (state: any) => state.menu;
 const mapActionsToProps = {
 	setBreadcrumbList,
 	setAuthRouters,
+	setMenuList,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(LayoutMenu);

@@ -13,6 +13,8 @@ const globalState: GlobalState = {
 		primary: "#1890ff",
 		// 是否开启深色模式
 		isDark: false,
+		// 色弱模式(weak) || 灰色模式(gray)
+		weakOrGray: "",
 	},
 };
 
@@ -29,6 +31,9 @@ const global = (state: GlobalState = globalState, action: AnyAction) =>
 				break;
 			case types.SET_LANGUAGE:
 				draftState.language = action.language;
+				break;
+			case types.SET_WEAK_OR_GRAY:
+				draftState.themeConfig.weakOrGray = action.weakOrGray;
 				break;
 			default:
 				break;

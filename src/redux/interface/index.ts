@@ -19,6 +19,7 @@ export interface BreadcrumbState {
 export interface ThemeConfigProp {
 	primary: string;
 	isDark: boolean;
+	weakOrGray: string;
 }
 
 export interface GlobalState {

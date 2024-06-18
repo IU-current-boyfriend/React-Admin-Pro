@@ -18,3 +18,5 @@ export const SET_AUTH_ROUTER = "SET_AUTH_ROUTER";
 export const SET_ASSEMBLY_SIZE = "SET_ASSEMBLY_SIZE";
 // 设置setLanguage
 export const SET_LANGUAGE = "SET_LANGUAGE";
+// 设置setWeakOrGray
+export const SET_WEAK_OR_GRAY = "SET_WEAK_OR_GRAY";

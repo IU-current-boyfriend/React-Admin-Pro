@@ -19,3 +19,9 @@ export const setLanguage = (language: string) => ({
 	type: types.SET_LANGUAGE,
 	language,
 });
+
+// * setWeakOrGray
+export const setWeakOrGray = (weakOrGray: string) => ({
+	type: types.SET_WEAK_OR_GRAY,
+	weakOrGray,
+});
