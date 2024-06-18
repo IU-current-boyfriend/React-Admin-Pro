@@ -1,18 +1,22 @@
-// import { TranslationOutlined } from "@ant-design/icons";
-import { Dropdown, Menu } from "antd";
-import { useState } from "react";
 import i18n from "i18next";
-import { localGet } from "@/utils/utils";
+import { Dropdown, Menu } from "antd";
+import { connect } from "react-redux";
+import { useState, useEffect } from "react";
+import { getBrowserLang } from "@/utils/utils";
+import { setLanguage } from "@/redux/modules/global/action";
 
-const Language = () => {
-	const [language, setLanguage] = useState(localGet("i18nextLng"));
+const Language = (props: any) => {
+	const [language, setLanguage] = useState(props.language);
 
-	// changeLanguage
+	useEffect(() => {
+		setLanguage(props.language || getBrowserLang());
+		i18n.changeLanguage(props.language || getBrowserLang());
+	}, [props.language]);
+
 	const changeLanguage = (val: string) => {
-		i18n.changeLanguage(val);
-		setLanguage(localGet("i18nextLng"));
-		console.log("language: =>", language);
+		props.setLanguage(val);
 	};
+
 	const menu = (
 		<Menu
 			items={[
@@ -38,4 +42,7 @@ const Language = () => {
 	);
 };
 
-export default Language;
+const mapStateToProps = (state: any) => state.global;
+const mapDispatchToProps = { setLanguage };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Language);

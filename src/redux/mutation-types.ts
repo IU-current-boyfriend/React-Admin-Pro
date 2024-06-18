@@ -16,3 +16,5 @@ export const SET_AUTH_BUTTON = "SET_AUTH_BUTTON";
 export const SET_AUTH_ROUTER = "SET_AUTH_ROUTER";
 // 设置assemblySize
 export const SET_ASSEMBLY_SIZE = "SET_ASSEMBLY_SIZE";
+// 设置setLanguage
+export const SET_LANGUAGE = "SET_LANGUAGE";
