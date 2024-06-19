@@ -12,7 +12,7 @@ export interface TabsState {
 
 export interface BreadcrumbState {
 	breadcrumbList: {
-		[key: string]: any;
+		[propName: string]: any;
 	};
 }
 

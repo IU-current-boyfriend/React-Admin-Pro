@@ -1,11 +1,10 @@
-export const useTheme = (props: any) => {
+export const useTheme = (weakOrGrap: string) => {
 	const initTheme = () => {
 		const body = document.documentElement as HTMLElement;
 
-		if (!props.themeConfig.weakOrGrap) body.setAttribute("style", "");
-		if (props.themeConfig.weakOrGray === "weak") body.setAttribute("style", "filter: invert(80%)");
-		if (props.themeConfig.weakOrGray === "gray") body.setAttribute("style", "filter: grayscale(1)");
-		props.setWeakOrGray(props.themeConfig.weakOrGray);
+		if (!weakOrGrap) body.setAttribute("style", "");
+		if (weakOrGrap === "weak") body.setAttribute("style", "filter: invert(80%)");
+		if (weakOrGrap === "gray") body.setAttribute("style", "filter: grayscale(1)");
 	};
 
 	initTheme();
