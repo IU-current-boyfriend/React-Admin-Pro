@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import zhCN from "antd/lib/locale/zh_CN";
 import enUS from "antd/lib/locale/en_US";
 import "moment/dist/locale/zh-cn";
+import AuthRouter from "@/routers/utils/authRouter";
 import "@/App.css";
 
 const App = (props: any) => {
@@ -27,7 +28,9 @@ const App = (props: any) => {
 	return (
 		<HashRouter>
 			<ConfigProvider locale={i18nLocale} componentSize={props.assemblySize}>
-				<Router />
+				<AuthRouter>
+					<Router />
+				</AuthRouter>
 			</ConfigProvider>
 		</HashRouter>
 	);

@@ -8,6 +8,7 @@ import { checkStatus } from "./helper/checkStatus";
 import axiosCanceler from "./helper/axiosCancel";
 import { showFullScreenLoading, tryHideFullScreenLoading } from "@/config/serviceLoading";
 import { store } from "@/redux";
+import { setToken } from "@/redux/modules/global/action";
 
 const config = {
 	// 默认地址
@@ -70,6 +71,7 @@ class RequestHttp {
 				 * 登录失效(code === 599)
 				 */
 				if (data.code === ResultEnum.OVERDUE) {
+					store.dispatch(setToken(""));
 					message.error(data.msg);
 					// navigate("/login"); // 因为抛出异常，可以看到效果
 					window.location.hash = "/login";

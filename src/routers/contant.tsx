@@ -1,5 +1,4 @@
 import Layout from "@/layouts/index";
-import AuthRouter from "@/routers/utils/authRouter";
 // import { createContext } from "react";
 // export const LayoutTitleContext = createContext({});
 // export const { Provider } = LayoutTitleContext;
@@ -11,8 +10,4 @@ import AuthRouter from "@/routers/utils/authRouter";
 // 		</Provider>
 // 	);
 // };
-export const LayoutIndex = () => (
-	<AuthRouter>
-		<Layout />
-	</AuthRouter>
-);
+export const LayoutIndex = () => <Layout />;

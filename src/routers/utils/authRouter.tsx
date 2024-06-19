@@ -5,6 +5,11 @@ import { store } from "@/redux/index";
 import { HOME_URL } from "@/config";
 import AxiosCancel from "@/api/helper/axiosCancel";
 
+/**
+ * 路由守卫组件
+ * @param props
+ * @returns
+ */
 const AuthRouter = (props: any) => {
 	const { pathname } = useLocation();
 	const route = searchRoute(pathname, routerArray);
@@ -27,7 +32,7 @@ const AuthRouter = (props: any) => {
 
 	if (routerList.indexOf(pathname) === -1) return <Navigate to="/403" />;
 
-	// 当前账号有权限返回Layout组件，正常访问页面
+	// 当前账号有权限返回Router，正常访问页面
 	return props.children;
 };
 
