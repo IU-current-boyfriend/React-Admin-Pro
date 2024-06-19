@@ -10,7 +10,7 @@ import AxiosCancel from "@/api/helper/axiosCancel";
  * @param props
  * @returns
  */
-const AuthRouter = (props: any) => {
+const AuthRouter = (props: { children: JSX.Element }) => {
 	const { pathname } = useLocation();
 	const route = searchRoute(pathname, routerArray);
 
