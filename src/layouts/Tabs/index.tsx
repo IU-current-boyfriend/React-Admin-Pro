@@ -37,8 +37,8 @@ const LayoutTabs = (props: any) => {
 	};
 
 	// * delTabs
-	const delTabs = () => {
-		if (pathname === HOME_URL) return;
+	const delTabs = (tabPath: string) => {
+		if (tabPath === HOME_URL) return;
 		props.tabsList.forEach((item: Menu.MenuOptions, index: number) => {
 			if (item.path !== pathname) return;
 			const nextTab = props.tabsList[index + 1] || props.tabsList[index - 1];
@@ -46,7 +46,7 @@ const LayoutTabs = (props: any) => {
 			navigate(nextTab.path);
 		});
 		message.success("你删除了tabs标签😄😄😄");
-		props.setTabsList(props.tabsList.filter((item: Menu.MenuOptions) => item.path !== pathname));
+		props.setTabsList(props.tabsList.filter((item: Menu.MenuOptions) => item.path !== tabPath));
 	};
 
 	return (
@@ -55,8 +55,8 @@ const LayoutTabs = (props: any) => {
 				type="editable-card"
 				activeKey={activeKey}
 				onChange={tabsClick}
-				onEdit={() => {
-					delTabs();
+				onEdit={(path) => {
+					delTabs(path as string);
 				}}
 				hideAdd
 			>
