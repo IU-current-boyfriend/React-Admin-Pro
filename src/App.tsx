@@ -6,12 +6,16 @@ import { ConfigProvider } from "antd";
 import { connect } from "react-redux";
 import zhCN from "antd/lib/locale/zh_CN";
 import enUS from "antd/lib/locale/en_US";
-import "moment/dist/locale/zh-cn";
 import AuthRouter from "@/routers/utils/authRouter";
+import { setWeakOrGray } from "./redux/modules/global/action";
+import { useTheme } from "@/hooks/useTheme";
 import "@/App.css";
+import "moment/dist/locale/zh-cn";
 
 const App = (props: any) => {
 	const [i18nLocale, setI18nLocale] = useState(zhCN);
+
+	useTheme(props);
 
 	const setLanguage = () => {
 		// 如果redux中有默认语言就设置成redux的默认语言，没有默认语言就设置成浏览器默认语言
@@ -37,5 +41,6 @@ const App = (props: any) => {
 };
 
 const mapStateToProps = (state: any) => state.global;
+const mapActionToProps = { setWeakOrGray };
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapActionToProps)(App);

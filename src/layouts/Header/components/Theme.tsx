@@ -1,42 +1,27 @@
 import { Drawer, Divider, Switch, message } from "antd";
-import { useState, useEffect } from "react";
+import { FireOutlined } from "@ant-design/icons";
+import { useState } from "react";
 import { connect } from "react-redux";
 import { setWeakOrGray } from "@/redux/modules/global/action";
 
 const Theme = (props: any) => {
 	const [visible, setVisible] = useState<boolean>(false);
-	const [weakOrGray, setWeakOrGray] = useState<string>(props.themeConfig.weakOrGray);
 
-	const showDrawer = () => {
-		setVisible(true);
-	};
-
-	const onClose = () => {
-		setVisible(false);
-	};
+	const { weakOrGray } = props.themeConfig;
 
 	const onChange = (checked: boolean, theme: string) => {
 		if (checked) return props.setWeakOrGray(theme);
 		props.setWeakOrGray("");
 	};
 
-	const initTheme = () => {
-		const elHtml = document.documentElement as HTMLElement;
-		if (!props.themeConfig.weakOrGray) elHtml.setAttribute("style", "");
-		if (props.themeConfig.weakOrGray === "weak") elHtml.setAttribute("style", "filter: invert(80%)");
-		if (props.themeConfig.weakOrGray === "gray") elHtml.setAttribute("style", "filter: grayscale(1)");
-		setWeakOrGray(props.themeConfig.weakOrGray);
-	};
-
-	useEffect(() => {
-		initTheme();
-	}, [props.themeConfig.weakOrGray]);
-
 	return (
 		<>
-			<i className="icon-style iconfont icon-zhuti" onClick={() => showDrawer()}></i>
-			<Drawer title="主题设置" closable={false} onClose={onClose} visible={visible} width={320}>
-				<Divider style={{ margin: "0 0 16px 0" }}>主题</Divider>
+			<i className="icon-style iconfont icon-zhuti" onClick={() => setVisible(true)}></i>
+			<Drawer title="主题设置" closable={false} onClose={() => setVisible(false)} visible={visible} width={320}>
+				<Divider className="divider">
+					<FireOutlined />
+					全局主题
+				</Divider>
 				<div className="theme-item">
 					<span>暗黑模式（未完成）</span>
 					<Switch
