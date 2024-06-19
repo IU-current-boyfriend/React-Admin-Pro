@@ -20,3 +20,5 @@ export const SET_ASSEMBLY_SIZE = "SET_ASSEMBLY_SIZE";
 export const SET_LANGUAGE = "SET_LANGUAGE";
 // 设置setWeakOrGray
 export const SET_WEAK_OR_GRAY = "SET_WEAK_OR_GRAY";
+// 设置setDrak
+export const SET_DARK = "SET_DARK";

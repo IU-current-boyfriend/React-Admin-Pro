@@ -5,8 +5,8 @@ import { Provider } from "react-redux";
 import { store, persistor } from "@/redux";
 import "@/styles/reset.less";
 import "@/styles/common.less";
+import "antd/dist/antd.less";
 import "@/assets/iconfont/iconfont.less";
-import "antd/dist/antd.css";
 import "@/language/index";
 import App from "@/App";
 

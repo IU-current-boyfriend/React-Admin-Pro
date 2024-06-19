@@ -28,6 +28,8 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 				},
 				less: {
 					// 引入css全局变量的文件 less
+					// javascriptEnabled: true, Inline JavaScript is not enabled. Is it set in your options?
+					javascriptEnabled: true,
 					additionalData: `@import "@/styles/var.less";`,
 				},
 			},
