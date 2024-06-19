@@ -15,7 +15,7 @@ const assemblyRouter: Array<RouteObject> = [
 				path: "/assembly/selectIcon",
 				element: lazyLoad(React.lazy(() => import("@/views/assembly/selectIcon/index"))),
 				meta: {
-					keepAlive: true,
+					// keepAlive: true,
 					requiresAuth: true,
 					title: "Icon 选择",
 					key: "selectIcon",
@@ -25,7 +25,7 @@ const assemblyRouter: Array<RouteObject> = [
 				path: "/assembly/batchImport",
 				element: lazyLoad(React.lazy(() => import("@/views/assembly/batchImport/index"))),
 				meta: {
-					keepAlive: true,
+					// keepAlive: true,
 					requiresAuth: true,
 					title: "批量导入数据",
 					key: "selectIcon",

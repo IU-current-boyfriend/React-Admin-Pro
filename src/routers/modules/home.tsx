@@ -15,7 +15,7 @@ const homeRouter: RouteObject[] = [
 				// element: lazyLoad(React.lazy(() => import("@/views/home/index"))),
 				element: <Home />,
 				meta: {
-					keepAlive: true,
+					// keepAlive: true,
 					requiresAuth: true,
 					title: "首页",
 					key: "home",
