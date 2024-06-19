@@ -48,7 +48,7 @@ class RequestHttp {
 				// const token: string = "123456";
 				// const token: string = "bqddxxwqmfncffacvbpkuxvwvqrhln";
 				const token: string = store.getState().global.token;
-				return { ...config, headers: { "x-access-token": token } };
+				return { ...config, headers: { ...config.headers, "x-access-token": token } };
 			},
 			(error: AxiosError) => {
 				return Promise.reject(error);
