@@ -16,10 +16,11 @@ const LayoutIndex = (props: any) => {
 	// const { pathname } = useLocation();
 	// 从antd中的Layout组件中解构出侧边栏、content组件
 	const { Sider, Content } = Layout;
+	const { isCollapse, updateCollapse, setAuthButtons } = props;
 
 	const getAuthorButtonsData = async () => {
 		const { data } = await getAuthorButtons();
-		props.setAuthButtons(data);
+		setAuthButtons(data);
 	};
 
 	// 监听窗口的变化
@@ -27,8 +28,8 @@ const LayoutIndex = (props: any) => {
 		window.onresize = () => {
 			return (() => {
 				let screenWidth = document.body.clientWidth;
-				if (props.isCollapse === false && screenWidth < 1200) props.updateCollapse(true);
-				if (props.isCollapse === false && screenWidth >= 1200) props.updateCollapse(false);
+				if (isCollapse === false && screenWidth < 1200) updateCollapse(true);
+				if (isCollapse === false && screenWidth >= 1200) updateCollapse(false);
 			})();
 		};
 	};

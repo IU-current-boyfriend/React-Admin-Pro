@@ -18,6 +18,7 @@ const LayoutMenu = (props: any) => {
 	const { pathname } = useLocation();
 	const [loading, setLoading] = useState<boolean>(false);
 	const [menuList, setMenuList] = useState<MenuItem[]>([]);
+	const { isCollapse, setBreadcrumbList, setAuthRouters, setMenuList: setMenuListAction } = props;
 
 	const getItem = (
 		label: React.ReactNode,
@@ -61,12 +62,12 @@ const LayoutMenu = (props: any) => {
 			if (!data) return;
 			setMenuList(deepLoopFloat(data));
 			// 储存处理过后的所有面包屑导航到redux中
-			props.setBreadcrumbList(findAllBreadcrumb(data));
+			setBreadcrumbList(findAllBreadcrumb(data));
 			// 把路由菜单处理成一维数组，存储到redux中，做菜单权限校验
 			const dynamicRouter = handleRouter(data);
-			props.setAuthRouters(dynamicRouter);
+			setAuthRouters(dynamicRouter);
 			// 将menu存储到redux中
-			props.setMenuList(data);
+			setMenuListAction(data);
 		} finally {
 			setLoading(false);
 		}
@@ -81,8 +82,8 @@ const LayoutMenu = (props: any) => {
 
 	useEffect(() => {
 		setSelectedKeys([pathname]);
-		props.isCollapse ? null : setOpenKeys(getOpenKeys(pathname));
-	}, [pathname, props.isCollapse]);
+		isCollapse ? null : setOpenKeys(getOpenKeys(pathname));
+	}, [pathname, isCollapse]);
 
 	useEffect(() => {
 		getMenuData();

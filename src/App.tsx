@@ -1,37 +1,42 @@
 import { useState, useEffect } from "react";
 import { getBrowserLang } from "@/utils/utils";
 import { HashRouter } from "react-router-dom";
+import i18n from "i18next";
 import Router from "@/routers/index";
 import { ConfigProvider } from "antd";
 import { connect } from "react-redux";
 import zhCN from "antd/lib/locale/zh_CN";
 import enUS from "antd/lib/locale/en_US";
 import AuthRouter from "@/routers/utils/authRouter";
-import { setWeakOrGray } from "./redux/modules/global/action";
+import { setWeakOrGray, setLanguage } from "./redux/modules/global/action";
 import { useTheme } from "@/hooks/useTheme";
 import "@/App.css";
 import "moment/dist/locale/zh-cn";
 
 const App = (props: any) => {
+	const { language, assemblySize, setLanguage } = props;
 	const [i18nLocale, setI18nLocale] = useState(zhCN);
 
 	useTheme(props);
 
-	const setLanguage = () => {
+	const setAntdLanguage = () => {
 		// 如果redux中有默认语言就设置成redux的默认语言，没有默认语言就设置成浏览器默认语言
-		if (props.language && props.language === "zh") return setI18nLocale(zhCN);
-		if (props.language && props.language === "en") return setI18nLocale(enUS);
+		if (language && language === "zh") return setI18nLocale(zhCN);
+		if (language && language === "en") return setI18nLocale(enUS);
 		if (getBrowserLang() === "zh") return setI18nLocale(zhCN);
 		if (getBrowserLang() === "en") return setI18nLocale(enUS);
 	};
 
 	useEffect(() => {
-		setLanguage();
-	}, [props.language]);
+		// 全局使用国际化
+		i18n.changeLanguage(language || getBrowserLang());
+		setLanguage(language || getBrowserLang());
+		setAntdLanguage();
+	}, [language]);
 
 	return (
 		<HashRouter>
-			<ConfigProvider locale={i18nLocale} componentSize={props.assemblySize}>
+			<ConfigProvider locale={i18nLocale} componentSize={assemblySize}>
 				<AuthRouter>
 					<Router />
 				</AuthRouter>
@@ -41,6 +46,6 @@ const App = (props: any) => {
 };
 
 const mapStateToProps = (state: any) => state.global;
-const mapActionToProps = { setWeakOrGray };
+const mapActionToProps = { setWeakOrGray, setLanguage };
 
 export default connect(mapStateToProps, mapActionToProps)(App);

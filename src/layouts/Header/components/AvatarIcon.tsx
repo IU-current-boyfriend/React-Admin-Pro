@@ -16,6 +16,7 @@ interface ModalProps {
 const AvatarIcon = (props: any) => {
 	const navigate = useNavigate();
 	const getHome = () => navigate(HOME_URL);
+	const { setToken } = props;
 	const infoRef = useRef<ModalProps>(null!);
 	const passRef = useRef<ModalProps>(null!);
 	const logout = () => {
@@ -26,7 +27,7 @@ const AvatarIcon = (props: any) => {
 			okText: "确认",
 			cancelText: "取消",
 			onOk: () => {
-				props.setToken("");
+				setToken("");
 				message.success("退出登录成功!");
 				navigate("/login");
 			},

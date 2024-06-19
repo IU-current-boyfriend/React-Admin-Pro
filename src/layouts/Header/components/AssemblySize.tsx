@@ -5,28 +5,29 @@ import { setAssemblySize } from "@/redux/modules/global/action";
 import { connect } from "react-redux";
 
 const AssemblySize = (props: any) => {
+	const { assemblySize, setAssemblySize } = props;
 	const onClickAssemblySize = (e: MenuInfo) => {
 		console.log("e: =>", e);
-		props.setAssemblySize(e.key);
+		setAssemblySize(e.key);
 	};
 	const menu = (
 		<Menu
 			items={[
 				{
 					key: "middle",
-					disabled: props.assemblySize === "middle",
+					disabled: assemblySize === "middle",
 					label: <span>默认</span>,
 					onClick: onClickAssemblySize,
 				},
 				{
 					key: "large",
-					disabled: props.assemblySize === "large",
+					disabled: assemblySize === "large",
 					label: <span>大型</span>,
 					onClick: onClickAssemblySize,
 				},
 				{
 					key: "small",
-					disabled: props.assemblySize === "small",
+					disabled: assemblySize === "small",
 					label: <span>小型</span>,
 					onClick: onClickAssemblySize,
 				},
