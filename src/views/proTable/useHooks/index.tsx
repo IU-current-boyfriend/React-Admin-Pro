@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Table, DatePicker } from "antd";
+import useAuthButtons from "@/hooks/useAuthButtons";
 import "./index.less";
 
-const useHooks = (props: any) => {
+const useHooks = () => {
 	const { RangePicker } = DatePicker;
+	const { BUTTONS } = useAuthButtons();
 	useEffect(() => {
-		console.log(props.authButtons);
+		console.log("Buttons: =>", BUTTONS);
 	}, []);
 
 	const dataSource = [
@@ -43,7 +45,7 @@ const useHooks = (props: any) => {
 
 	return (
 		<>
-			<RangePicker />
+			{BUTTONS.add ? <RangePicker /> : null}
 			<Table dataSource={dataSource} columns={columns}></Table>
 		</>
 	);

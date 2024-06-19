@@ -4,6 +4,7 @@ import produce from "immer";
 import * as types from "@/redux/mutation-types";
 
 const authState: AuthState = {
+	// * { useHooks: {add: true, delete: false}}
 	authButtons: {},
 	authRouters: [],
 };
