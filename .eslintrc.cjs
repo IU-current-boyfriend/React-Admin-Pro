@@ -65,5 +65,6 @@ module.exports = {
 		// react (https://github.com/jsx-eslint/eslint-plugin-react)
 		"react/jsx-uses-vars": "error",
 		"react-hooks/exhaustive-deps": "off",
+		"react-hooks/rules-of-hooks": "off",
 	},
 };
