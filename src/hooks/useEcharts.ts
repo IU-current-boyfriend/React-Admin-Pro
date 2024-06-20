@@ -1,32 +1,27 @@
 import * as echarts from "echarts";
+// import { useCallback } from "react";
 
 /**
  * @description 使用Eachrts（只是为了添加图标响应式）
  * @param echart myChart Echarts实例(必须传递)
  * @param options 绘制Echarts的参数（必须传递）
  */
-const useEcharts = (echart: echarts.EChartsType, options: echarts.EChartsCoreOption) => {
-	if (options && typeof options === "object") {
-		echart.setOption(options);
-	}
+const useEcharts = (element: HTMLElement, options: echarts.EChartsCoreOption) => {
+	const myChart: echarts.EChartsType = echarts.init(element);
 
-	// 自适应尺寸
-	const echartsResize = () => {
-		echart && echart.resize();
+	myChart.setOption(options);
+
+	const setMyChartSizeEvent = () => {
+		myChart && myChart.resize();
 	};
 
-	const addEvent = () => {
-		window.addEventListener("resize", echartsResize, false);
-	};
-
-	addEvent();
-
-	const deleteEvent = () => {
-		window.removeEventListener("resize", echartsResize, false);
-	};
+	const bindChartSizeEvent = () => window.addEventListener("resize", setMyChartSizeEvent, false);
+	const removeChartSizeEvent = () => window.removeEventListener("resize", setMyChartSizeEvent, false);
 
 	return {
-		deleteEvent,
+		chartInstance: myChart,
+		bindChartSizeEvent,
+		removeChartSizeEvent,
 	};
 };
 

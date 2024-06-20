@@ -291,18 +291,18 @@ const WaterChart = () => {
 			},
 		],
 	};
+
 	useEffect(() => {
-		// 创建一个echarts实例，返回echarts实例。不能在单个容器中创建多个echarts实例
-		const myChart: echarts.EChartsType = echarts.init(echartsRef.current as HTMLDivElement);
-		// 设置图标实例的配置项和数据
-		const { deleteEvent } = useEcharts(myChart, option);
-		return () => {
-			// myChart.dispose()销毁实例。实例销毁后无法再被使用
-			myChart && myChart.dispose();
-			// 清除监听window尺寸变化的事件处理函数
-			deleteEvent && deleteEvent();
-		};
+		if (echartsRef.current) {
+			const { chartInstance, bindChartSizeEvent, removeChartSizeEvent } = useEcharts(echartsRef.current, option);
+			bindChartSizeEvent && bindChartSizeEvent();
+			return () => {
+				chartInstance && chartInstance.dispose();
+				removeChartSizeEvent && removeChartSizeEvent();
+			};
+		}
 	}, []);
+
 	return <div ref={echartsRef} className="content-box"></div>;
 };
 

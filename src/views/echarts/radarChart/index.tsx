@@ -63,12 +63,14 @@ const RadarChart = () => {
 	};
 
 	useEffect(() => {
-		const myChart: echarts.EChartsType = echarts.init(echartsRef.current as HTMLDivElement);
-		const { deleteEvent } = useEcharts(myChart, option);
-		return () => {
-			myChart && myChart.dispose();
-			deleteEvent && deleteEvent();
-		};
+		if (echartsRef.current) {
+			const { chartInstance, bindChartSizeEvent, removeChartSizeEvent } = useEcharts(echartsRef.current, option);
+			bindChartSizeEvent && bindChartSizeEvent();
+			return () => {
+				chartInstance && chartInstance.dispose();
+				removeChartSizeEvent && removeChartSizeEvent();
+			};
+		}
 	}, []);
 
 	return <div ref={echartsRef} className="content-box"></div>;
