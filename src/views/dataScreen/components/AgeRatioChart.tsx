@@ -1,12 +1,11 @@
 import { useEcharts } from "@/hooks/useEcharts";
-import { type EChartsOption } from "echarts";
+import { EChartsOption } from "echarts";
 
 interface ChartProp {
 	value: string;
 	name: string;
 	percentage: string;
 }
-
 const AgeRatioChart = () => {
 	let data: any = [
 		{
@@ -46,7 +45,7 @@ const AgeRatioChart = () => {
 		tooltip: {
 			show: true,
 			trigger: "item",
-			formatter: "{b}<br/>占比:{d}%",
+			formatter: "{b} <br/>占比：{d}%",
 		},
 		legend: {
 			orient: "vertical",
@@ -54,17 +53,17 @@ const AgeRatioChart = () => {
 			top: "15px",
 			itemGap: 15,
 			itemWidth: 14,
-			formatter: function (name: string) {
+			formatter: function (name) {
 				let text = "";
 				data.forEach((val: ChartProp) => {
 					if (val.name === name) {
-						text = "" + name + " " + val.percentage;
+						text = " " + name + "　 " + val.percentage;
 					}
 				});
 				return text;
 			},
 			textStyle: {
-				color: "rgb(98,137,169)",
+				color: "#fff",
 			},
 		},
 		grid: {
@@ -143,8 +142,8 @@ const AgeRatioChart = () => {
 			},
 		],
 	};
-	const [myChart] = useEcharts(option, data);
-	return <div ref={myChart} style={{ width: "100%", height: "100%" }}></div>;
+	const [echartsRef] = useEcharts(option, data);
+	return <div ref={echartsRef} style={{ width: "100%", height: "100%" }}></div>;
 };
 
 export default AgeRatioChart;

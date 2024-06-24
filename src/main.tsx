@@ -7,6 +7,7 @@ import "@/styles/reset.less";
 import "@/styles/common.less";
 import "antd/dist/antd.less";
 import "@/assets/iconfont/iconfont.less";
+import "@/assets/fonts/font.less";
 import "@/language/index";
 import App from "@/App";
 

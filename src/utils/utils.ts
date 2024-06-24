@@ -221,3 +221,14 @@ export const getBrowserLang = () => {
 	}
 	return defaultBrowserLang;
 };
+
+/**
+ * @description 生成随机数
+ * @param min 最小值
+ * @param max 最大值
+ * [0, 1) => 1 - 10 Math.random();
+ */
+export function randomNum(min: number, max: number): number {
+	let num = Math.floor(Math.random() * (min - max) + max);
+	return num;
+}

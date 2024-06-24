@@ -21,7 +21,7 @@ export const useEcharts = (options: echarts.EChartsCoreOption, data?: any) => {
 		if (data?.length !== 0) {
 			myEchart?.current?.setOption(options);
 		}
-	}, data);
+	}, [data]);
 
 	/* 组件初始化的操作 */
 	useEffect(() => {
