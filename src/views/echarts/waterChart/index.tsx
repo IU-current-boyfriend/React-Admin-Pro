@@ -1,11 +1,9 @@
-import { useEffect, useRef } from "react";
 import * as echarts from "echarts";
 import "echarts-liquidfill";
-import useEcharts from "@/hooks/useEcharts";
+import { useEcharts } from "@/hooks/useEcharts";
 import "./index.less";
 
 const WaterChart = () => {
-	const echartsRef = useRef<HTMLDivElement>(null);
 	let value = 0.5;
 	let data = [value, value, value];
 	let option: echarts.EChartsCoreOption = {
@@ -291,19 +289,8 @@ const WaterChart = () => {
 			},
 		],
 	};
-
-	useEffect(() => {
-		if (echartsRef.current) {
-			const { chartInstance, bindChartSizeEvent, removeChartSizeEvent } = useEcharts(echartsRef.current, option);
-			bindChartSizeEvent && bindChartSizeEvent();
-			return () => {
-				chartInstance && chartInstance.dispose();
-				removeChartSizeEvent && removeChartSizeEvent();
-			};
-		}
-	}, []);
-
-	return <div ref={echartsRef} className="content-box"></div>;
+	const [myChart] = useEcharts(option);
+	return <div ref={myChart} className="content-box"></div>;
 };
 
 export default WaterChart;

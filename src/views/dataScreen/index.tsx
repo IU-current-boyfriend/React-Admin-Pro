@@ -1,6 +1,6 @@
 import { Button } from "antd";
-// import { getAuthorButtons, getMenuList } from "@/api/modules/login";
 import { getAuthorButtons } from "@/api/modules/login";
+import AgeRatioChart from "./components/AgeRatioChart";
 
 const DataScreen = () => {
 	const requestMenuList = async () => {
@@ -10,7 +10,8 @@ const DataScreen = () => {
 	};
 	return (
 		<div className="content-box">
-			<span className="text">DataScreen 🍓🍇🍈🍉</span>
+			{/* <span className="text">DataScreen 🍓🍇🍈🍉</span> */}
+			<AgeRatioChart />
 			<Button type="primary" onClick={requestMenuList}>
 				点我发起网络请求😎
 			</Button>

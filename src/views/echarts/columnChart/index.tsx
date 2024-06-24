@@ -1,139 +1,125 @@
-import { useEffect, useRef } from "react";
 import * as echarts from "echarts";
-import useEcharts from "@/hooks/useEcharts";
+import { useEcharts } from "@/hooks/useEcharts";
 
 import "./index.less";
-
-const ColumnChart = () => {
-	const echartsRef = useRef<HTMLDivElement>(null);
-	let option: echarts.EChartsCoreOption = {
-		tooltip: {
-			trigger: "axis",
-			axisPointer: {
-				type: "shadow",
-			},
+let option: echarts.EChartsCoreOption = {
+	tooltip: {
+		trigger: "axis",
+		axisPointer: {
+			type: "shadow",
 		},
-		legend: {
-			textStyle: {
+	},
+	legend: {
+		textStyle: {
+			color: "#a1a1a1",
+		},
+	},
+	grid: {
+		left: "3%",
+		right: "4%",
+		bottom: "3%",
+		containLabel: true,
+	},
+	xAxis: [
+		{
+			type: "category",
+			data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+			axisLabel: {
 				color: "#a1a1a1",
 			},
 		},
-		grid: {
-			left: "3%",
-			right: "4%",
-			bottom: "3%",
-			containLabel: true,
+	],
+	yAxis: [
+		{
+			type: "value",
+			axisLabel: {
+				color: "#a1a1a1",
+			},
 		},
-		xAxis: [
-			{
-				type: "category",
-				data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-				axisLabel: {
-					color: "#a1a1a1",
-				},
+	],
+	series: [
+		{
+			name: "Direct",
+			type: "bar",
+			emphasis: {
+				focus: "series",
 			},
-		],
-		yAxis: [
-			{
-				type: "value",
-				axisLabel: {
-					color: "#a1a1a1",
-				},
+			data: [320, 332, 301, 334, 390, 330, 320],
+		},
+		{
+			name: "Email",
+			type: "bar",
+			stack: "Ad",
+			emphasis: {
+				focus: "series",
 			},
-		],
-		series: [
-			{
-				name: "Direct",
-				type: "bar",
-				emphasis: {
-					focus: "series",
-				},
-				data: [320, 332, 301, 334, 390, 330, 320],
+			data: [120, 132, 101, 134, 90, 230, 210],
+		},
+		{
+			name: "Union Ads",
+			type: "bar",
+			stack: "Ad",
+			emphasis: {
+				focus: "series",
 			},
-			{
-				name: "Email",
-				type: "bar",
-				stack: "Ad",
-				emphasis: {
-					focus: "series",
-				},
-				data: [120, 132, 101, 134, 90, 230, 210],
+			data: [220, 182, 191, 234, 290, 330, 310],
+		},
+		{
+			name: "Video Ads",
+			type: "bar",
+			stack: "Ad",
+			emphasis: {
+				focus: "series",
 			},
-			{
-				name: "Union Ads",
-				type: "bar",
-				stack: "Ad",
-				emphasis: {
-					focus: "series",
-				},
-				data: [220, 182, 191, 234, 290, 330, 310],
+			data: [150, 232, 201, 154, 190, 330, 410],
+		},
+		{
+			name: "Search Engine",
+			type: "bar",
+			emphasis: {
+				focus: "series",
 			},
-			{
-				name: "Video Ads",
-				type: "bar",
-				stack: "Ad",
-				emphasis: {
-					focus: "series",
+			data: [862, 1018, 964, 1026, 1679, 1600, 1570],
+			markLine: {
+				lineStyle: {
+					type: "dashed",
 				},
-				data: [150, 232, 201, 154, 190, 330, 410],
+				data: [[{ type: "min" }, { type: "max" }]],
 			},
-			{
-				name: "Search Engine",
-				type: "bar",
-				emphasis: {
-					focus: "series",
-				},
-				data: [862, 1018, 964, 1026, 1679, 1600, 1570],
-				markLine: {
-					lineStyle: {
-						type: "dashed",
-					},
-					data: [[{ type: "min" }, { type: "max" }]],
-				},
+		},
+		{
+			name: "Baidu",
+			type: "bar",
+			barWidth: 5,
+			stack: "Search Engine",
+			emphasis: {
+				focus: "series",
 			},
-			{
-				name: "Baidu",
-				type: "bar",
-				barWidth: 5,
-				stack: "Search Engine",
-				emphasis: {
-					focus: "series",
-				},
-				data: [620, 732, 701, 734, 1090, 1130, 1120],
+			data: [620, 732, 701, 734, 1090, 1130, 1120],
+		},
+		{
+			name: "Bing",
+			type: "bar",
+			stack: "Search Engine",
+			emphasis: {
+				focus: "series",
 			},
-			{
-				name: "Bing",
-				type: "bar",
-				stack: "Search Engine",
-				emphasis: {
-					focus: "series",
-				},
-				data: [60, 72, 71, 74, 190, 130, 110],
+			data: [60, 72, 71, 74, 190, 130, 110],
+		},
+		{
+			name: "Others",
+			type: "bar",
+			stack: "Search Engine",
+			emphasis: {
+				focus: "series",
 			},
-			{
-				name: "Others",
-				type: "bar",
-				stack: "Search Engine",
-				emphasis: {
-					focus: "series",
-				},
-				data: [62, 82, 91, 84, 109, 110, 120],
-			},
-		],
-	};
-
-	useEffect(() => {
-		if (echartsRef.current) {
-			const { chartInstance, bindChartSizeEvent, removeChartSizeEvent } = useEcharts(echartsRef.current, option);
-			bindChartSizeEvent && bindChartSizeEvent();
-			return () => {
-				chartInstance && chartInstance.dispose();
-				removeChartSizeEvent && removeChartSizeEvent();
-			};
-		}
-	}, []);
-
-	return <div ref={echartsRef} className="content-box"></div>;
+			data: [62, 82, 91, 84, 109, 110, 120],
+		},
+	],
+};
+const ColumnChart = () => {
+	const [myChart] = useEcharts(option);
+	return <div ref={myChart} className="content-box"></div>;
 };
 
 export default ColumnChart;
