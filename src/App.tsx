@@ -15,10 +15,9 @@ import "moment/dist/locale/zh-cn";
 
 const App = (props: any) => {
 	const { language, assemblySize, themeConfig, setLanguage } = props;
-	const { weakOrGray } = themeConfig;
 	const [i18nLocale, setI18nLocale] = useState(zhCN);
 
-	useTheme(weakOrGray);
+	useTheme(themeConfig);
 
 	const setAntdLanguage = () => {
 		// 如果redux中有默认语言就设置成redux的默认语言，没有默认语言就设置成浏览器默认语言

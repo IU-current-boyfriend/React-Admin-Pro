@@ -112,7 +112,7 @@ let option: echarts.EChartsOption = {
 };
 const LineChart = () => {
 	const [myChart] = useEcharts(option);
-	return <div ref={myChart} className="content-box"></div>;
+	return <div ref={myChart} className="card content-box"></div>;
 };
 
 export default LineChart;

@@ -83,7 +83,7 @@ let option: echarts.EChartsOption = {
 const PieChart = () => {
 	const [myChart] = useEcharts(option);
 
-	return <div ref={myChart} className="content-box"></div>;
+	return <div ref={myChart} className="card content-box"></div>;
 };
 
 export default PieChart;
