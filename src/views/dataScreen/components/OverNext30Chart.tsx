@@ -1,6 +1,7 @@
 import { useEcharts } from "@/hooks/useEcharts";
 import { EChartsOption } from "echarts";
 import { randomNum } from "@/utils/utils";
+import "./OverNext30Chart.less";
 
 interface ChartProp {
 	unit: string[];
@@ -189,7 +190,7 @@ const OverNext30Chart = () => {
 		}),
 	};
 	const [echartsRef] = useEcharts(option, data);
-	return <div ref={echartsRef} style={{ width: "100%", height: "100%" }}></div>;
+	return <div ref={echartsRef} className="echarts"></div>;
 };
 
 export default OverNext30Chart;

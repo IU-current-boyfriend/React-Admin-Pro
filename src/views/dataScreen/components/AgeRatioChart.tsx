@@ -143,7 +143,7 @@ const AgeRatioChart = () => {
 		],
 	};
 	const [echartsRef] = useEcharts(option, data);
-	return <div ref={echartsRef} style={{ width: "100%", height: "100%" }}></div>;
+	return <div ref={echartsRef} className="echarts"></div>;
 };
 
 export default AgeRatioChart;

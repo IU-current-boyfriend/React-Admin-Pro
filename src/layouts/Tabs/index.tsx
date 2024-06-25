@@ -53,6 +53,7 @@ const LayoutTabs = (props: any) => {
 	return (
 		<div className="tabs">
 			<Tabs
+				// animated
 				type="editable-card"
 				activeKey={activeKey}
 				onChange={tabsClick}

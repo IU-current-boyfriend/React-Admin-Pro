@@ -217,14 +217,14 @@ const HotPlateChart = () => {
 	};
 	const [echartsRef] = useEcharts(option, data);
 	return (
-		<div className="content-box">
+		<>
 			<div className="echarts-header">
 				<span>排名</span>
 				<span>景区</span>
 				<span>预约数量</span>
 			</div>
-			<div ref={echartsRef} className="echarts"></div>
-		</div>
+			<div ref={echartsRef} className="hot-echarts"></div>
+		</>
 	);
 };
 
