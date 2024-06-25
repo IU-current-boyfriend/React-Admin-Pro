@@ -1,4 +1,5 @@
 import { defineConfig, loadEnv, ConfigEnv, UserConfig } from "vite";
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 // import { Agent } from "node:http";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
@@ -63,6 +64,11 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 						title: viteEnv.VITE_GLOB_APP_TITLE,
 					},
 				},
+			}),
+			// * 使用svg图标
+			createSvgIconsPlugin({
+				iconDirs: [resolve(process.cwd(), "src/assets/icons")],
+				symbolId: "icon-[dir]-[name]",
 			}),
 			// * EsLint 报错信息显示在浏览器界面上
 			eslintPlugin(),

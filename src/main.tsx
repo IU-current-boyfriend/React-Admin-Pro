@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import { store, persistor } from "@/redux";
+import "virtual:svg-icons-register";
 import "@/styles/reset.less";
 import "@/styles/common.less";
 import "antd/dist/antd.less";
