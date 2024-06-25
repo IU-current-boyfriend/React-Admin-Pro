@@ -40,12 +40,14 @@ const LayoutTabs = (props: any) => {
 	// * delTabs
 	const delTabs = (tabPath: string) => {
 		if (tabPath === HOME_URL) return;
-		tabsList.forEach((item: Menu.MenuOptions, index: number) => {
-			if (item.path !== pathname) return;
-			const nextTab = tabsList[index + 1] || props.tabsList[index - 1];
-			if (!nextTab) return;
-			navigate(nextTab.path);
-		});
+		if (tabPath === pathname) {
+			tabsList.forEach((item: Menu.MenuOptions, index: number) => {
+				if (item.path !== pathname) return;
+				const nextTab = tabsList[index + 1] || props.tabsList[index - 1];
+				if (!nextTab) return;
+				navigate(nextTab.path);
+			});
+		}
 		message.success("你删除了tabs标签😄😄😄");
 		setTabsList(tabsList.filter((item: Menu.MenuOptions) => item.path !== tabPath));
 	};
