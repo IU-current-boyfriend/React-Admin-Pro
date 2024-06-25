@@ -32,3 +32,5 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById("root")
 );
+
+// "react-activation": "^0.11.2" 类似vue中的keepAlive效果

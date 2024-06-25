@@ -13,9 +13,11 @@ import "./index.less";
 const LayoutTabs = (props: any) => {
 	const { TabPane } = Tabs;
 	const { pathname } = useLocation();
+	const { tabsList } = props.tabs;
+	const { themeConfig } = props.global;
+	const { setTabsList } = props;
 	const [activeKey, setActiveKey] = useState<string>(pathname);
 	const navigate = useNavigate();
-	const { tabsList, setTabsList } = props;
 
 	useEffect(() => {
 		addTabs();
@@ -25,7 +27,7 @@ const LayoutTabs = (props: any) => {
 	// addTabs
 	const addTabs = () => {
 		const route = searchRoute(pathname, routerArray);
-		let newTabsList = JSON.parse(JSON.stringify(props.tabsList));
+		let newTabsList = JSON.parse(JSON.stringify(tabsList));
 		if (tabsList.every((item: any) => item.path !== route.path)) {
 			newTabsList.push({ title: route.meta!.title, path: route.path });
 		}
@@ -43,7 +45,7 @@ const LayoutTabs = (props: any) => {
 		if (tabPath === pathname) {
 			tabsList.forEach((item: Menu.MenuOptions, index: number) => {
 				if (item.path !== pathname) return;
-				const nextTab = tabsList[index + 1] || props.tabsList[index - 1];
+				const nextTab = tabsList[index + 1] || tabsList[index - 1];
 				if (!nextTab) return;
 				navigate(nextTab.path);
 			});
@@ -53,38 +55,42 @@ const LayoutTabs = (props: any) => {
 	};
 
 	return (
-		<div className="tabs">
-			<Tabs
-				// animated
-				type="editable-card"
-				activeKey={activeKey}
-				onChange={tabsClick}
-				onEdit={(path) => {
-					delTabs(path as string);
-				}}
-				hideAdd
-			>
-				{tabsList.map((item: Menu.MenuOptions) => {
-					return (
-						<TabPane
-							key={item.path}
-							tab={
-								<span>
-									{item.path === HOME_URL ? <HomeFilled /> : ""}
-									{item.title}
-								</span>
-							}
-							closable={item.path !== HOME_URL}
-						></TabPane>
-					);
-				})}
-			</Tabs>
-			<MoreButton delTabs={delTabs} {...props}></MoreButton>
-		</div>
+		<>
+			{!themeConfig.tabs && (
+				<div className="tabs">
+					<Tabs
+						// animated
+						type="editable-card"
+						activeKey={activeKey}
+						onChange={tabsClick}
+						onEdit={(path) => {
+							delTabs(path as string);
+						}}
+						hideAdd
+					>
+						{tabsList.map((item: Menu.MenuOptions) => {
+							return (
+								<TabPane
+									key={item.path}
+									tab={
+										<span>
+											{item.path === HOME_URL ? <HomeFilled /> : ""}
+											{item.title}
+										</span>
+									}
+									closable={item.path !== HOME_URL}
+								></TabPane>
+							);
+						})}
+					</Tabs>
+					<MoreButton delTabs={delTabs} {...props}></MoreButton>
+				</div>
+			)}
+		</>
 	);
 };
 
-const mapStateToProps = (state: any) => state.tabs;
+const mapStateToProps = (state: any) => state;
 /*
 	mapActionToProps是对象的情况，而不是函数的情况，需要去官网看一下: 官网指出:
 	connect 的 mapDispatch 参数可以定义为接收 dispatch 参数的函数，
