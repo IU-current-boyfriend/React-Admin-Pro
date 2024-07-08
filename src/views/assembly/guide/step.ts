@@ -36,8 +36,8 @@ const steps: Step[] = [
 	{
 		element: ".icon-zhongyingwen",
 		popover: {
-			title: "Switch Assembly Size",
-			description: "Switch the system size",
+			title: "Switch Language",
+			description: "Switch the system language",
 			position: "left",
 		},
 	},

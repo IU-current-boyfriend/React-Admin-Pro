@@ -1,7 +1,7 @@
 import { Alert, Button } from "antd";
 import Driver from "driver.js";
 import "driver.js/dist/driver.min.css";
-import steps from "./strp";
+import steps from "./step";
 
 const Guide = () => {
 	const driver = new Driver({
