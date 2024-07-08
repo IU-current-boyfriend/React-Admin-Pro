@@ -7,7 +7,7 @@ const CollapseIcon = (props: any) => {
 	const { isCollapse, updateCollapse } = props;
 	return (
 		<div className="collapsed" onClick={() => updateCollapse(!isCollapse)}>
-			{isCollapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+			{isCollapse ? <MenuUnfoldOutlined id="isCollapse" /> : <MenuFoldOutlined id="isCollapse" />}
 		</div>
 	);
 };
