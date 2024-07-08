@@ -16,7 +16,7 @@ export const useTheme = (themeConfig: ThemeConfigProp) => {
 		const getStyle = head.getElementsByTagName("style");
 		if (getStyle.length > 0) {
 			for (let i = 0, l = getStyle.length; i < l; i++) {
-				if (getStyle[i]?.getAttribute("data-type") === "theme") getStyle[i].remove();
+				if (getStyle[i]?.getAttribute("data-type") === "dark") getStyle[i].remove();
 			}
 		}
 		let styleDom = document.createElement("style");
